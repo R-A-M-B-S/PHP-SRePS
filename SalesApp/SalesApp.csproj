@@ -73,6 +73,7 @@
     <Reference Include="System.Data.SQLite">
       <HintPath>..\sqlite\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -89,6 +90,12 @@
     </Compile>
     <Compile Include="AddSale.Designer.cs">
       <DependentUpon>AddSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DisplaySales.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DisplaySales.Designer.cs">
+      <DependentUpon>DisplaySales.cs</DependentUpon>
     </Compile>
     <Compile Include="MonthlyReport.cs">
       <SubType>UserControl</SubType>
@@ -108,6 +115,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddSale.resx">
       <DependentUpon>AddSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplaySales.resx">
+      <DependentUpon>DisplaySales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
