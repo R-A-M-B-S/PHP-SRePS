@@ -32,11 +32,14 @@
             this.tabAddSale = new System.Windows.Forms.TabPage();
             this.tabEditAssets = new System.Windows.Forms.TabPage();
             this.tabMonthlyReport = new System.Windows.Forms.TabPage();
+            this.tabDisplaySales = new System.Windows.Forms.TabPage();
             this.addSaleControl = new SalesApp.AddSale();
             this.monthlyReportControl = new SalesApp.MonthlyReport();
+            this.displaySales1 = new SalesApp.DisplaySales();
             this.tabControlMain.SuspendLayout();
             this.tabAddSale.SuspendLayout();
             this.tabMonthlyReport.SuspendLayout();
+            this.tabDisplaySales.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -44,12 +47,14 @@
             this.tabControlMain.Controls.Add(this.tabAddSale);
             this.tabControlMain.Controls.Add(this.tabEditAssets);
             this.tabControlMain.Controls.Add(this.tabMonthlyReport);
+            this.tabControlMain.Controls.Add(this.tabDisplaySales);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(784, 561);
             this.tabControlMain.TabIndex = 0;
+            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
             // 
             // tabAddSale
             // 
@@ -83,6 +88,17 @@
             this.tabMonthlyReport.Text = "Monthly Report";
             this.tabMonthlyReport.UseVisualStyleBackColor = true;
             // 
+            // tabDisplaySales
+            // 
+            this.tabDisplaySales.Controls.Add(this.displaySales1);
+            this.tabDisplaySales.Location = new System.Drawing.Point(4, 22);
+            this.tabDisplaySales.Name = "tabDisplaySales";
+            this.tabDisplaySales.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDisplaySales.Size = new System.Drawing.Size(776, 535);
+            this.tabDisplaySales.TabIndex = 3;
+            this.tabDisplaySales.Text = "DisplaySales";
+            this.tabDisplaySales.UseVisualStyleBackColor = true;
+            // 
             // addSaleControl
             // 
             this.addSaleControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -90,6 +106,7 @@
             this.addSaleControl.Name = "addSaleControl";
             this.addSaleControl.Size = new System.Drawing.Size(770, 529);
             this.addSaleControl.TabIndex = 0;
+            this.addSaleControl.Load += new System.EventHandler(this.addSaleControl_Load);
             // 
             // monthlyReportControl
             // 
@@ -98,6 +115,13 @@
             this.monthlyReportControl.Name = "monthlyReportControl";
             this.monthlyReportControl.Size = new System.Drawing.Size(770, 529);
             this.monthlyReportControl.TabIndex = 0;
+            // 
+            // displaySales1
+            // 
+            this.displaySales1.Location = new System.Drawing.Point(0, 0);
+            this.displaySales1.Name = "displaySales1";
+            this.displaySales1.Size = new System.Drawing.Size(776, 535);
+            this.displaySales1.TabIndex = 0;
             // 
             // MainScreen
             // 
@@ -110,6 +134,7 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabAddSale.ResumeLayout(false);
             this.tabMonthlyReport.ResumeLayout(false);
+            this.tabDisplaySales.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -121,6 +146,8 @@
         private AddSale addSaleControl;
         private System.Windows.Forms.TabPage tabMonthlyReport;
         private MonthlyReport monthlyReportControl;
+        private System.Windows.Forms.TabPage tabDisplaySales;
+        private DisplaySales displaySales1;
     }
 }
 
