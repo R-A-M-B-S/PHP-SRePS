@@ -137,7 +137,7 @@ namespace SalesApp
             }
 
             double amountPaid = (double)(CashValue.Value + EftposValue.Value);
-            db.AddSale(items, amountPaid);
+            db.AddSale(items, (double)CashValue.Value, (double)EftposValue.Value);
 
             dt.Clear();
         }

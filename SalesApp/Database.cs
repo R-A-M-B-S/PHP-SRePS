@@ -40,9 +40,9 @@ namespace SalesApp
             return this;
         }
 
-        public void AddSale(List<SaleItem> items, double amountPaid)
+        public void AddSale(List<SaleItem> items, double amountPaidCash, double amountPaidEftpos)
         {
-            string sql = "insert into SalesRecord (AmountPaid) VALUES ("+ amountPaid + "); SELECT last_insert_rowid()";
+            string sql = "insert into SalesRecord (AmountPaidCash, AmountPaidEftpos) VALUES (" + amountPaidCash + ", " + amountPaidEftpos + "); SELECT last_insert_rowid()";
             SQLiteCommand command = new SQLiteCommand(sql, dbConn);
             string row_id = command.ExecuteScalar().ToString();
 
