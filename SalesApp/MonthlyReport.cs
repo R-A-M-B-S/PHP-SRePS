@@ -25,10 +25,18 @@ namespace SalesApp
             dt.Columns.Add("ItemNo");
             dt.Columns.Add("Description");
             dt.Columns.Add("No. Sales");
-
-            reportGrid.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            reportGrid.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            reportGrid.Columns["No. Sales"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                     
+			try
+			{
+				reportGrid.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+				reportGrid.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+				reportGrid.Columns["No. Sales"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+			}
+			catch (NullReferenceException)
+			{
+				// for some reason, on mono environments, the above columns havn't generated yet.
+                // Since we're only targeting, windows, I'll just let it crash.
+			}
 
             month.SelectedIndex = DateTime.Now.Month - 1;
             year.Value = DateTime.Now.Year;

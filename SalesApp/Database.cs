@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using System.Data.SQLite;
+using Mono.Data.Sqlite;
 using System.Collections.Generic;
 using System;
 
@@ -8,7 +8,7 @@ namespace SalesApp
     public class Database
     {
 
-        private SQLiteConnection dbConn;
+		private SqliteConnection dbConn;
         private readonly string filename;
 
         public Database(string filename)
@@ -24,15 +24,15 @@ namespace SalesApp
 
         public Database Execute(string sql)
         {
-            new SQLiteCommand(sql, dbConn).ExecuteNonQuery();
+            new SqliteCommand(sql, dbConn).ExecuteNonQuery();
             return this;
         }
 
         public Database Connect()
         {
             if (!File.Exists(filename))
-                SQLiteConnection.CreateFile(filename);
-            dbConn = new SQLiteConnection("Data Source=" + filename + ";Version=3");
+                SqliteConnection.CreateFile(filename);
+            dbConn = new SqliteConnection("Data Source=" + filename + ";Version=3");
             dbConn.Open();
             return this;
         }
@@ -40,13 +40,13 @@ namespace SalesApp
         public void AddSale(List<SaleItem> items, double amountPaid)
         {
             string sql = "insert into SalesRecord (AmountPaid) VALUES ("+ amountPaid + "); SELECT last_insert_rowid()";
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+            SqliteCommand command = new SqliteCommand(sql, dbConn);
             string row_id = command.ExecuteScalar().ToString();
 
             foreach (SaleItem item in items)
             {
                 sql = "INSERT INTO SalesAssets(SaleId, AssetId, Qty) VALUES ("+ row_id +", "+item.Asset+", "+item.Qty+")";
-                command = new SQLiteCommand(sql, dbConn);
+                command = new SqliteCommand(sql, dbConn);
                 command.ExecuteNonQuery();
             }
         }
@@ -54,7 +54,7 @@ namespace SalesApp
         public string GetAssetName(int assetID)
         {
             string sql = "SELECT Name from Asset WHERE AssetID = " + assetID;
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+            SqliteCommand command = new SqliteCommand(sql, dbConn);
             object o_name = command.ExecuteScalar();
             if (o_name != null)
                 return o_name.ToString();
@@ -64,7 +64,7 @@ namespace SalesApp
         public double GetAssetPrice(int assetID)
         {
             string sql = "SELECT Price from Asset WHERE AssetID = " + assetID;
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+            SqliteCommand command = new SqliteCommand(sql, dbConn);
             object o_price = command.ExecuteScalar();
             if (o_price != null)
             {
