@@ -141,6 +141,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Sale.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

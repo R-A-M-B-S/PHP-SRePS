@@ -85,14 +85,30 @@ namespace SalesApp
         {
             List<int> result = new List<int>();
             string sql = "SELECT SaleID from SalesRecord";
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
-            SQLiteDataReader o_saleRecord = command.ExecuteReader();
+            SqliteCommand command = new SqliteCommand(sql, dbConn);
+            SqliteDataReader o_saleRecord = command.ExecuteReader();
             if (o_saleRecord.HasRows)
             {
                 while (o_saleRecord.Read())
                 {
                     result.Add(o_saleRecord.GetInt16(0));
                  
+                }
+            }
+            return result;
+        }
+
+		public List<int> getListSaleIDs(int year, int month)
+        {
+            List<int> result = new List<int>();
+			string sql = "SELECT SaleID from SalesRecord sr WHERE date('%Y', sr.Timestamp)=" + year + " AND date('%m', sr.Timestamp) = " + month;
+            SqliteCommand command = new SqliteCommand(sql, dbConn);
+            SqliteDataReader o_saleRecord = command.ExecuteReader();
+            if (o_saleRecord.HasRows)
+            {
+                while (o_saleRecord.Read())
+                {
+                    result.Add(o_saleRecord.GetInt16(0));
                 }
             }
             return result;
@@ -108,8 +124,8 @@ namespace SalesApp
             result.Columns.Add("SubPrice");
             
             string sql = "SELECT * from SalesAssets WHERE SaleID = " + saleID;
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
-            SQLiteDataReader o_AssetRecord = command.ExecuteReader();
+            SqliteCommand command = new SqliteCommand(sql, dbConn);
+            SqliteDataReader o_AssetRecord = command.ExecuteReader();
             if (o_AssetRecord.HasRows)
             {
                 while (o_AssetRecord.Read())
@@ -123,6 +139,36 @@ namespace SalesApp
             }
             
             return result;
+        } 
+
+		public Sale getSaleRecordObject(int saleID)
+        {
+            DataTable result = new DataTable();
+            result.Columns.Add("ItemNo");
+            result.Columns.Add("Description");
+            result.Columns.Add("Item Price");
+            result.Columns.Add("Qty");
+            result.Columns.Add("SubPrice");
+
+            string sql = "SELECT * from SalesAssets WHERE SaleID = " + saleID;
+            SqliteCommand command = new SqliteCommand(sql, dbConn);
+            SqliteDataReader o_AssetRecord = command.ExecuteReader();
+
+			Sale sale = new Sale(saleID);
+			if (o_AssetRecord.HasRows)
+            {
+                while (o_AssetRecord.Read())
+                {
+					int assetID = o_AssetRecord.GetInt16(1);
+                    string desc = GetAssetName(assetID);
+                    double price = GetAssetPrice(assetID);
+                    int qty = o_AssetRecord.GetInt16(2);
+					SaleItem item = new SaleItem(assetID, qty);
+					sale.Add(item);
+                }
+            }
+            
+            return sale;
         }
     }
 }

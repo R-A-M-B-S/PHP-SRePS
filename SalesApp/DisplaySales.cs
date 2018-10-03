@@ -17,14 +17,9 @@ namespace SalesApp
 
         public DisplaySales()
         {
-            InitializeComponent();
-
-        
+			InitializeComponent();
 
             resetDataTables();
-
-
-
         }
 
         public void setSaleListUpdated()
@@ -69,12 +64,18 @@ namespace SalesApp
             focused_dt.Columns.Add("Qty");
             focused_dt.Columns.Add("SubPrice");
 
-            SalesData.Columns["SaleID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            SalesDataFocused.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            SalesDataFocused.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            SalesDataFocused.Columns["Item Price"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            SalesDataFocused.Columns["Qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            SalesDataFocused.Columns["SubPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+			try
+			{
+				SalesData.Columns["SaleID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+				SalesDataFocused.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+				SalesDataFocused.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+				SalesDataFocused.Columns["Item Price"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+				SalesDataFocused.Columns["Qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+				SalesDataFocused.Columns["SubPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+			}
+			catch (NullReferenceException)
+			{
+			}
         }
 
         public void updateSales()

@@ -42,7 +42,7 @@ namespace SalesApp
             year.Value = DateTime.Now.Year;
         }
 
-        public void setDatabase(Database db)
+        public void SetDatabase(Database db)
         {
             this.db = db;
         }
@@ -59,21 +59,35 @@ namespace SalesApp
 
         private void UpdateData()
         {
+			if (db == null)
+				return;
+
             int theMonth = month.SelectedIndex;
-            int theYear = (int)year.Value;
+			int theYear = (int)year.Value;
+			List<int> ids = db.getListSaleIDs(theYear, theMonth);
 
-            // TODO fetch and update datatable
-            // get data from database
+			// clear the datatable
+			DataTable dt = reportGrid.DataSource as DataTable;
+			dt.Clear();
 
-            // clear the datatable
-            DataTable dt = reportGrid.DataSource as DataTable;
-            dt.Clear();
+			Dictionary<int, int> sales = new Dictionary<int, int>();
 
-            /* TODO finish this:
-             foreach (db_row : database.rows) {
-                dt.Rows.Add(db_row.ItemNo, db_row.Description, db_row.NoSales);
-             }
-             */
+			foreach (int id in ids)
+			{
+				Sale sale = db.getSaleRecordObject(id);
+
+				foreach (SaleItem item in sale.Items)
+				{
+					if (sales.ContainsKey(item.Asset))
+					{
+						sales[item.Asset] += item.Qty;
+					}
+					else
+					{
+						sales[item.Asset] = item.Qty;
+					}
+				}
+			}
         }
     }
 }

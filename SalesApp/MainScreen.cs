@@ -8,7 +8,7 @@ namespace SalesApp
         {
             InitializeComponent();
             addSaleControl.setDatabase(db);
-            monthlyReportControl.setDatabase(db);
+            monthlyReportControl.SetDatabase(db);
             displaySales1.setDatabase(db);
         }
 
