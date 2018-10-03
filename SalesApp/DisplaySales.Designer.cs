@@ -46,10 +46,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.EftposValue = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.CashValue = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.SalesData = new System.Windows.Forms.DataGridView();
             this.SalesDataFocused = new System.Windows.Forms.DataGridView();
-            this.CashValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.saleIDValue)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.MainLayout.SuspendLayout();
@@ -292,6 +292,18 @@
             this.label10.Text = "Payment Method";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // CashValue
+            // 
+            this.CashValue.AutoSize = true;
+            this.CashValue.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.CashValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CashValue.Location = new System.Drawing.Point(103, 82);
+            this.CashValue.Name = "CashValue";
+            this.CashValue.Size = new System.Drawing.Size(93, 20);
+            this.CashValue.TabIndex = 15;
+            this.CashValue.Text = "0.0";
+            this.CashValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -331,18 +343,6 @@
             this.SalesDataFocused.ReadOnly = true;
             this.SalesDataFocused.Size = new System.Drawing.Size(382, 303);
             this.SalesDataFocused.TabIndex = 7;
-            // 
-            // CashValue
-            // 
-            this.CashValue.AutoSize = true;
-            this.CashValue.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.CashValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CashValue.Location = new System.Drawing.Point(103, 82);
-            this.CashValue.Name = "CashValue";
-            this.CashValue.Size = new System.Drawing.Size(93, 20);
-            this.CashValue.TabIndex = 15;
-            this.CashValue.Text = "0.0";
-            this.CashValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DisplaySales
             // 

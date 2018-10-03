@@ -24,17 +24,17 @@ namespace SalesApp
             dt.Columns.Add("Qty");
             dt.Columns.Add("SubPrice");
 
-			try
-			{
-				SalesData.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-				SalesData.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-				SalesData.Columns["Item Price"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-				SalesData.Columns["Qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-				SalesData.Columns["SubPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			}
-			catch (NullReferenceException)
-			{
-			}
+            try
+            {
+                SalesData.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                SalesData.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                SalesData.Columns["Item Price"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                SalesData.Columns["Qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                SalesData.Columns["SubPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+            catch (NullReferenceException)
+            {
+            }
         }
 
         public void setDatabase(Database db)
@@ -72,42 +72,42 @@ namespace SalesApp
             Asset asset = db.GetAsset(itemno);
 
             // If value exists, update it
-			foreach (DataRow row in dt.Rows)
+            foreach (DataRow row in dt.Rows)
             {
                 if (row["ItemNo"].ToString().Equals(itemno.ToString()))
                 {
                     int newQty = int.Parse(row["Qty"].ToString()) + qty;
-					SaleItem item = new SaleItem(asset.id, newQty);
-					row["Qty"] = newQty;
-					row["SubPrice"] = item.SubPrice(db);
+                    SaleItem item = new SaleItem(asset.id, newQty);
+                    row["Qty"] = newQty;
+                    row["SubPrice"] = item.SubPrice(db);
                     added = true;
                 }
             }
 
-			if (!added)
-			{
-				SaleItem item = new SaleItem(asset.id, qty);
-				// Make sure the params here match the order of the datatable
-				dt.Rows.Add(itemno, asset.name, asset.price, qty, item.SubPrice(db));
-			}
+            if (!added)
+            {
+                SaleItem item = new SaleItem(asset.id, qty);
+                // Make sure the params here match the order of the datatable
+                dt.Rows.Add(itemno, asset.name, asset.price, qty, item.SubPrice(db));
+            }
         
             update_totals_info();
         }
 
         private void update_totals_info()
         {
-			Sale sale = makeSale();
+            Sale sale = makeSale();
 
-			SubTotalValue.Text = sale.subTotal(db).ToString();
-			TaxValue.Text = sale.Tax(db).ToString();
-			TotalValue.Text = sale.TotalPrice(db).ToString();
+            SubTotalValue.Text = sale.subTotal(db).ToString();
+            TaxValue.Text = sale.Tax(db).ToString();
+            TotalValue.Text = sale.TotalPrice(db).ToString();
 
             UpdateFinaliseStatus();
         }
 
-		private Sale makeSale()
-		{
-			Sale sale = new Sale();
+        private Sale makeSale()
+        {
+            Sale sale = new Sale();
             foreach (DataRow row in dt.Rows)
             {
                 string s_item = row["ItemNo"].ToString();
@@ -128,13 +128,13 @@ namespace SalesApp
             sale.amountPaidCash = (double)CashValue.Value;
             sale.amountPaidEftpos = (double)EftposValue.Value;
 
-			return sale;
-		}
+            return sale;
+        }
 
         private void finalise_sale(object sender, MouseEventArgs e)
         {         
-			Sale sale = makeSale();
-			db.AddSale(sale);
+            Sale sale = makeSale();
+            db.AddSale(sale);
             dt.Clear();
             update_totals_info();
             CashValue.Value = 0;

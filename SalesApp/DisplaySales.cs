@@ -16,7 +16,7 @@ namespace SalesApp
 
         public DisplaySales()
         {
-			InitializeComponent();
+            InitializeComponent();
 
             //Reused from AddSale TODO Simplify
             DataTable dt = new DataTable();
@@ -61,9 +61,9 @@ namespace SalesApp
 
         private void updateSalesData(int saleID)
         {
-			Sale sale = db.getSaleRecord(saleID);
-			DataTable dt = SalesDataFocused.DataSource as DataTable;
-			dt.Clear();
+            Sale sale = db.getSaleRecord(saleID);
+            DataTable dt = SalesDataFocused.DataSource as DataTable;
+            dt.Clear();
 
             foreach (SaleItem item in sale.Items)
             {
