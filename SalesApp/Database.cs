@@ -143,13 +143,6 @@ namespace SalesApp
 
 		public Sale getSaleRecordObject(int saleID)
         {
-            DataTable result = new DataTable();
-            result.Columns.Add("ItemNo");
-            result.Columns.Add("Description");
-            result.Columns.Add("Item Price");
-            result.Columns.Add("Qty");
-            result.Columns.Add("SubPrice");
-
             string sql = "SELECT * from SalesAssets WHERE SaleID = " + saleID;
             SqliteCommand command = new SqliteCommand(sql, dbConn);
             SqliteDataReader o_AssetRecord = command.ExecuteReader();
