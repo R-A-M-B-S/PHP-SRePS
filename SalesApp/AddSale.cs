@@ -70,16 +70,30 @@ namespace SalesApp
         // Called from clicking on the AddItem button
         private void AddItem(object sender, EventArgs e)
         {
+            bool added = false;
             int itemno = (int)assetValue.Value;
             string name = db.GetAssetName(itemno);
             double price = db.GetAssetPrice(itemno);
 
             int qty = (int)qtyValue.Value;
-            double subPrice = price * qty;
+            double subPrice = price * qty;  
 
             // Make sure the params here match the order of the datatable
-            dt.Rows.Add(itemno, name, price, qty, subPrice);
+            //If value exists, update it
+            for(int i = 1; i <= dt.Rows.Count; i++)
+            {
+                if (dt.Rows[i-1]["ItemNo"].ToString().Equals(itemno.ToString()))
+                {
+                    double newQty = double.Parse(dt.Rows[i-1]["Qty"].ToString()) + qty;
+                    dt.Rows[i - 1]["Qty"] = newQty;
+                    dt.Rows[i - 1]["SubPrice"] = newQty * price;
+                    added = true;
+                }
+               
+            }
 
+            if (!added) { dt.Rows.Add(itemno, name, price, qty, subPrice); }
+        
             update_totals_info(dt);
         }
 
@@ -129,7 +143,7 @@ namespace SalesApp
             }
 
             double amountPaid = (double)(CashValue.Value + EftposValue.Value);
-            db.AddSale(items, amountPaid);
+            db.AddSale(items, (double)CashValue.Value, (double)EftposValue.Value);
 
             dt.Clear();
         }

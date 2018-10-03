@@ -88,6 +88,12 @@
     <Compile Include="AddSale.Designer.cs">
       <DependentUpon>AddSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="DisplaySales.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DisplaySales.Designer.cs">
+      <DependentUpon>DisplaySales.cs</DependentUpon>
+    </Compile>
     <Compile Include="MonthlyReport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -106,6 +112,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddSale.resx">
       <DependentUpon>AddSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplaySales.resx">
+      <DependentUpon>DisplaySales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>

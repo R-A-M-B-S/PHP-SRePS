@@ -2,6 +2,7 @@
 using Mono.Data.Sqlite;
 using System.Collections.Generic;
 using System;
+using System.Data;
 
 namespace SalesApp
 {
@@ -10,6 +11,8 @@ namespace SalesApp
 
 		private SqliteConnection dbConn;
         private readonly string filename;
+
+      
 
         public Database(string filename)
         {
@@ -37,9 +40,9 @@ namespace SalesApp
             return this;
         }
 
-        public void AddSale(List<SaleItem> items, double amountPaid)
+        public void AddSale(List<SaleItem> items, double amountPaidCash, double amountPaidEftpos)
         {
-            string sql = "insert into SalesRecord (AmountPaid) VALUES ("+ amountPaid + "); SELECT last_insert_rowid()";
+            string sql = "insert into SalesRecord (AmountPaidCash, AmountPaidEftpos) VALUES (" + amountPaidCash + ", " + amountPaidEftpos + "); SELECT last_insert_rowid()";
             SqliteCommand command = new SqliteCommand(sql, dbConn);
             string row_id = command.ExecuteScalar().ToString();
 
@@ -72,6 +75,54 @@ namespace SalesApp
                 return price;
             }
             return 0;
+        }
+
+        /// <summary>
+        /// Gets a list of Sale IDs for the List of Sales in Display Sales
+        /// </summary>
+        /// <returns></returns>
+        public List<int> getListSaleIDs()
+        {
+            List<int> result = new List<int>();
+            string sql = "SELECT SaleID from SalesRecord";
+            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+            SQLiteDataReader o_saleRecord = command.ExecuteReader();
+            if (o_saleRecord.HasRows)
+            {
+                while (o_saleRecord.Read())
+                {
+                    result.Add(o_saleRecord.GetInt16(0));
+                 
+                }
+            }
+            return result;
+        }
+
+        public DataTable getSaleRecord(int saleID)
+        {
+            DataTable result = new DataTable();
+            result.Columns.Add("ItemNo");
+            result.Columns.Add("Description");
+            result.Columns.Add("Item Price");
+            result.Columns.Add("Qty");
+            result.Columns.Add("SubPrice");
+            
+            string sql = "SELECT * from SalesAssets WHERE SaleID = " + saleID;
+            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+            SQLiteDataReader o_AssetRecord = command.ExecuteReader();
+            if (o_AssetRecord.HasRows)
+            {
+                while (o_AssetRecord.Read())
+                {
+                    int assetID = o_AssetRecord.GetInt16(1);
+                    string desc = GetAssetName(assetID);
+                    double price = GetAssetPrice(assetID);
+                    int qty = o_AssetRecord.GetInt16(2);
+                    result.Rows.Add(assetID, desc, price, qty, qty * price);
+                }
+            }
+            
+            return result;
         }
     }
 }
