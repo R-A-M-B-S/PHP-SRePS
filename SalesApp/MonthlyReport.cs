@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SalesApp
@@ -56,13 +51,14 @@ namespace SalesApp
         {
             UpdateData();
         }
+       
 
         private void UpdateData()
         {
 			if (db == null)
 				return;
 
-            int theMonth = month.SelectedIndex;
+            int theMonth = month.SelectedIndex + 1;
 			int theYear = (int)year.Value;
 			List<int> ids = db.getListSaleIDs(theYear, theMonth);
 
@@ -71,9 +67,11 @@ namespace SalesApp
 			dt.Clear();
 
 			Dictionary<int, int> sales = new Dictionary<int, int>();
+			System.Console.Out.WriteLine("Hia");
 
 			foreach (int id in ids)
 			{
+				System.Console.Out.WriteLine("ID: " + id);
 				Sale sale = db.getSaleRecordObject(id);
 
 				foreach (SaleItem item in sale.Items)
@@ -87,6 +85,13 @@ namespace SalesApp
 						sales[item.Asset] = item.Qty;
 					}
 				}
+			}
+
+			foreach (int asset in sales.Keys)
+			{
+				int qty = sales[asset];
+				string desc = db.GetAssetName(asset);
+				dt.Rows.Add(asset, desc, qty);
 			}
         }
     }

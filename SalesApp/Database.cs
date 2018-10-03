@@ -101,7 +101,8 @@ namespace SalesApp
 		public List<int> getListSaleIDs(int year, int month)
         {
             List<int> result = new List<int>();
-			string sql = "SELECT SaleID from SalesRecord sr WHERE date('%Y', sr.Timestamp)=" + year + " AND date('%m', sr.Timestamp) = " + month;
+			string sql = "SELECT SaleID from SalesRecord sr WHERE strftime('%Y', sr.Timestamp)='" + year + "' AND strftime('%m', sr.Timestamp) = '" + month + "'";
+			System.Console.Out.WriteLine(sql);
             SqliteCommand command = new SqliteCommand(sql, dbConn);
             SqliteDataReader o_saleRecord = command.ExecuteReader();
             if (o_saleRecord.HasRows)
