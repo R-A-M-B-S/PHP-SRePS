@@ -98,22 +98,33 @@ namespace SalesApp
             return result;
         }
 
-		public List<int> getListSaleIDs(int year, int month)
-        {
-            List<int> result = new List<int>();
-			string sql = "SELECT SaleID from SalesRecord sr WHERE strftime('%Y', sr.Timestamp)='" + year + "' AND strftime('%m', sr.Timestamp) = '" + month + "'";
-			System.Console.Out.WriteLine(sql);
-            SqliteCommand command = new SqliteCommand(sql, dbConn);
-            SqliteDataReader o_saleRecord = command.ExecuteReader();
-            if (o_saleRecord.HasRows)
+		public IDictionary<int, int> GetAssetSales(int year, int month)
+		{
+			string sql = @"
+                SELECT sa.AssetId,            
+                Sum(sa.Qty) as qty
+                FROM SalesAssets sa
+                INNER JOIN SalesRecord s
+                ON s.SaleId = sa.SaleId
+                WHERE strftime('%Y', s.TimeStamp) = '" + year + @"'
+                AND strftime('%m', s.TimeStamp) = '" + month + @"'
+                GROUP BY sa.AssetId";
+
+			SqliteCommand command = new SqliteCommand(sql, dbConn);
+            SqliteDataReader reader = command.ExecuteReader();
+            
+			Dictionary<int, int> sales = new Dictionary<int, int>();
+			if (reader.HasRows)
             {
-                while (o_saleRecord.Read())
+				while (reader.Read())
                 {
-                    result.Add(o_saleRecord.GetInt16(0));
+					int id = reader.GetInt16(0);
+					int qty = reader.GetInt16(1);
+					sales.Add(id, qty);
                 }
             }
-            return result;
-        }
+			return sales;
+		}
 
         public DataTable getSaleRecord(int saleID)
         {

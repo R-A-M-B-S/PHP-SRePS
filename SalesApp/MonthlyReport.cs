@@ -60,32 +60,12 @@ namespace SalesApp
 
             int theMonth = month.SelectedIndex + 1;
 			int theYear = (int)year.Value;
-			List<int> ids = db.getListSaleIDs(theYear, theMonth);
 
 			// clear the datatable
 			DataTable dt = reportGrid.DataSource as DataTable;
 			dt.Clear();
 
-			Dictionary<int, int> sales = new Dictionary<int, int>();
-			System.Console.Out.WriteLine("Hia");
-
-			foreach (int id in ids)
-			{
-				System.Console.Out.WriteLine("ID: " + id);
-				Sale sale = db.getSaleRecordObject(id);
-
-				foreach (SaleItem item in sale.Items)
-				{
-					if (sales.ContainsKey(item.Asset))
-					{
-						sales[item.Asset] += item.Qty;
-					}
-					else
-					{
-						sales[item.Asset] = item.Qty;
-					}
-				}
-			}
+			IDictionary<int, int> sales = db.GetAssetSales(theYear, theMonth);
 
 			foreach (int asset in sales.Keys)
 			{
