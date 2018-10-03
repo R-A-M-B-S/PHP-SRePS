@@ -21,6 +21,7 @@ namespace SalesApp
         {
             displaySales1.resetDataTables();
             displaySales1.updateSales();
+            monthlyReportControl.UpdateData();
         }
     }
 }

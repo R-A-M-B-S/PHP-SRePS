@@ -53,7 +53,7 @@ namespace SalesApp
         }
        
 
-        private void UpdateData()
+        public void UpdateData()
         {
 			if (db == null)
 				return;
