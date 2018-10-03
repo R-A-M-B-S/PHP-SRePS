@@ -36,7 +36,7 @@
             this.nowShowingLabel = new System.Windows.Forms.Label();
             this.MainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.eftposLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SubTotalValue = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,11 +44,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.TotalValue = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.EftposValue = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.SalesData = new System.Windows.Forms.DataGridView();
             this.SalesDataFocused = new System.Windows.Forms.DataGridView();
+            this.CashValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.saleIDValue)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.MainLayout.SuspendLayout();
@@ -144,7 +145,7 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.eftposLabel, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.SubTotalValue, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 1);
@@ -152,8 +153,9 @@
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.TotalValue, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label9, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.EftposValue, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.label10, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.CashValue, 1, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(382, 342);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -168,17 +170,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 125);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
-            // label3
+            // eftposLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(4, 103);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 21);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Cash";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.eftposLabel.AutoSize = true;
+            this.eftposLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.eftposLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eftposLabel.Location = new System.Drawing.Point(4, 103);
+            this.eftposLabel.Name = "eftposLabel";
+            this.eftposLabel.Size = new System.Drawing.Size(92, 21);
+            this.eftposLabel.TabIndex = 14;
+            this.eftposLabel.Text = "Efpos";
+            this.eftposLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -264,17 +266,17 @@
             this.label8.Text = "Cash";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label9
+            // EftposValue
             // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(103, 103);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(93, 21);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "0.0";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.EftposValue.AutoSize = true;
+            this.EftposValue.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.EftposValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EftposValue.Location = new System.Drawing.Point(103, 103);
+            this.EftposValue.Name = "EftposValue";
+            this.EftposValue.Size = new System.Drawing.Size(93, 21);
+            this.EftposValue.TabIndex = 8;
+            this.EftposValue.Text = "0.0";
+            this.EftposValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label10
             // 
@@ -330,6 +332,18 @@
             this.SalesDataFocused.Size = new System.Drawing.Size(382, 303);
             this.SalesDataFocused.TabIndex = 7;
             // 
+            // CashValue
+            // 
+            this.CashValue.AutoSize = true;
+            this.CashValue.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.CashValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CashValue.Location = new System.Drawing.Point(103, 82);
+            this.CashValue.Name = "CashValue";
+            this.CashValue.Size = new System.Drawing.Size(93, 20);
+            this.CashValue.TabIndex = 15;
+            this.CashValue.Text = "0.0";
+            this.CashValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // DisplaySales
             // 
             this.Controls.Add(this.MainLayout);
@@ -369,12 +383,13 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label TotalValue;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label EftposValue;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView SalesDataFocused;
         private System.Windows.Forms.DataGridView SalesData;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label eftposLabel;
         private System.Windows.Forms.Label nowShowingLabel;
+        private System.Windows.Forms.Label CashValue;
     }
 }

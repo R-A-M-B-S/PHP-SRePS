@@ -134,8 +134,11 @@ namespace SalesApp
         private void finalise_sale(object sender, MouseEventArgs e)
         {         
 			Sale sale = makeSale();
-			db.AddSale(sale);         
+			db.AddSale(sale);
             dt.Clear();
+            update_totals_info();
+            CashValue.Value = 0;
+            EftposValue.Value = 0;
         }
     }
 }

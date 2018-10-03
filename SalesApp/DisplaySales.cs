@@ -13,18 +13,38 @@ namespace SalesApp
         private Database db;
         private DataTable dt;
         private DataTable focused_dt;
-        private bool saleListUpdated;
 
         public DisplaySales()
         {
 			InitializeComponent();
 
-            resetDataTables();
-        }
+            //Reused from AddSale TODO Simplify
+            DataTable dt = new DataTable();
+            DataTable focused_dt = new DataTable();
+            SalesData.DataSource = dt;
+            SalesDataFocused.DataSource = focused_dt;
+            this.dt = dt;
+            this.focused_dt = focused_dt;
 
-        public void setSaleListUpdated()
-        {
-            this.saleListUpdated = false;
+            dt.Columns.Add("SaleID");
+            focused_dt.Columns.Add("ItemNo");
+            focused_dt.Columns.Add("Description");
+            focused_dt.Columns.Add("Item Price");
+            focused_dt.Columns.Add("Qty");
+            focused_dt.Columns.Add("SubPrice");
+
+            try
+            {
+                SalesData.Columns["SaleID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                SalesDataFocused.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                SalesDataFocused.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                SalesDataFocused.Columns["Item Price"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                SalesDataFocused.Columns["Qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                SalesDataFocused.Columns["SubPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+            catch (NullReferenceException)
+            {
+            }
         }
 
         public void setDatabase(Database db)
@@ -45,87 +65,43 @@ namespace SalesApp
 			DataTable dt = SalesDataFocused.DataSource as DataTable;
 			dt.Clear();
 
-            update_totals_info(dt);
+            foreach (SaleItem item in sale.Items)
+            {
+                Asset asset = db.GetAsset(item.Asset);
+                dt.Rows.Add(item.Asset, asset.name, asset.price, item.Qty, item.SubPrice(db));
+            }
+
+            update_totals_info(sale);
             nowShowingLabel.Text = "Now Showing Sale: " + saleID;
-        }
-
-        public void resetDataTables()
-        {
-            //Reused from AddSale TODO Simplify
-            DataTable dt = new DataTable();
-            DataTable focused_dt = new DataTable();
-            SalesData.DataSource = dt;
-            SalesDataFocused.DataSource = focused_dt;
-            this.dt = dt;
-            this.focused_dt = focused_dt;
-
-            dt.Columns.Add("SaleID");
-            focused_dt.Columns.Add("ItemNo");
-            focused_dt.Columns.Add("Description");
-            focused_dt.Columns.Add("Item Price");
-            focused_dt.Columns.Add("Qty");
-            focused_dt.Columns.Add("SubPrice");
-
-			try
-			{
-				SalesData.Columns["SaleID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-				SalesDataFocused.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-				SalesDataFocused.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-				SalesDataFocused.Columns["Item Price"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-				SalesDataFocused.Columns["Qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-				SalesDataFocused.Columns["SubPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			}
-			catch (NullReferenceException)
-			{
-			}
         }
 
         public void updateSales()
         {
             DataTable dt = SalesData.DataSource as DataTable;
+            dt.Clear();
+
             List<int> salesID = db.getListSaleIDs();
-            if (salesID != null)
+            foreach (int id in salesID)
             {
-                for (int i = 1; i <= salesID.Count; i++)
-                {
-                    dt.Rows.Add(salesID[i-1]);
-                }
+                dt.Rows.Add(id);
             }
         }
 
 
-        private void update_totals_info(DataTable dt)
+        private void update_totals_info(Sale sale)
         {
-            double sum = 0.0;
-            foreach (DataRow row in dt.Rows)
-            {
-                string s_value = row["SubPrice"].ToString();
-                double value = double.TryParse(s_value, out value) ? value : 0;
-                sum += value;
-            }
+            SubTotalValue.Text = sale.subTotal(db).ToString();
+            TaxValue.Text = sale.Tax(db).ToString();
+            TotalValue.Text = sale.TotalPrice(db).ToString();
 
-            // TODO refractor these calcs into a new function and unit test it.
-            // Make sure that it's not possible to be sub-cents in the calcs
-            // Also, unit test that the sum is calculated right
-            double tax = Math.Floor(sum * 100 * 0.1) / 100; // assume tax is 10%
-            double total = tax + sum;
-
-            SubTotalValue.Text = sum.ToString();
-            TaxValue.Text = tax.ToString();
-            TotalValue.Text = total.ToString();
-
-            //Get Paid Items
-
-            
+            EftposValue.Text = sale.amountPaidEftpos.ToString();
+            CashValue.Text = sale.amountPaidCash.ToString();
         }
 
         private void searchItemButton_Click(object sender, EventArgs e)
         {
             int searchID = int.Parse(saleIDValue.Value.ToString());
             updateSalesData(searchID);
-
         }
-
-
     }
 }

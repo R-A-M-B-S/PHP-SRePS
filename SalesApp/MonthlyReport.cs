@@ -71,9 +71,10 @@ namespace SalesApp
 			{
 				int qty = sales[assetID];
 				Asset asset = db.GetAsset(assetID);
-				string desc = asset.description;
+				string desc = asset.name;
 				dt.Rows.Add(asset.id, desc, qty);
 			}
         }
+        
     }
 }

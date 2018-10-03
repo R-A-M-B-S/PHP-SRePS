@@ -12,14 +12,8 @@ namespace SalesApp
             displaySales1.setDatabase(db);
         }
 
-        private void addSaleControl_Load(object sender, System.EventArgs e)
-        {
-
-        }
-
         private void tabControlMain_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            displaySales1.resetDataTables();
             displaySales1.updateSales();
         }
     }
