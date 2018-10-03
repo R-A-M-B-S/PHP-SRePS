@@ -15,6 +15,7 @@ namespace SalesApp
         private void tabControlMain_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             displaySales1.updateSales();
+            monthlyReportControl.UpdateData();
         }
     }
 }
