@@ -41,8 +41,10 @@ namespace SalesApp
 
         private void updateSalesData(int saleID)
         {
-            DataTable dt = db.getSaleRecord(saleID);
-            SalesDataFocused.DataSource = dt;
+			Sale sale = db.getSaleRecord(saleID);
+			DataTable dt = SalesDataFocused.DataSource as DataTable;
+			dt.Clear();
+
             update_totals_info(dt);
             nowShowingLabel.Text = "Now Showing Sale: " + saleID;
         }

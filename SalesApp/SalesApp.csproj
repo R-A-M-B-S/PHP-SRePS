@@ -142,6 +142,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Sale.cs" />
+    <Compile Include="Asset.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -65,13 +65,14 @@ namespace SalesApp
 			DataTable dt = reportGrid.DataSource as DataTable;
 			dt.Clear();
 
-			IDictionary<int, int> sales = db.GetAssetSales(theYear, theMonth);
+			IDictionary<int, int> sales = db.CountAssetSales(theYear, theMonth);
 
-			foreach (int asset in sales.Keys)
+			foreach (int assetID in sales.Keys)
 			{
-				int qty = sales[asset];
-				string desc = db.GetAssetName(asset);
-				dt.Rows.Add(asset, desc, qty);
+				int qty = sales[assetID];
+				Asset asset = db.GetAsset(assetID);
+				string desc = asset.description;
+				dt.Rows.Add(asset.id, desc, qty);
 			}
         }
     }
