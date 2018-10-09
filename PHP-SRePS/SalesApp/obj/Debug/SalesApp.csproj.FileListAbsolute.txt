@@ -1,0 +1,15 @@
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\obj\Debug\SalesApp.csprojResolveAssemblyReference.cache
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\obj\Debug\SalesApp.AddSale.resources
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\obj\Debug\SalesApp.DisplaySales.resources
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\obj\Debug\SalesApp.MainScreen.resources
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\obj\Debug\SalesApp.MonthlyReport.resources
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\obj\Debug\SalesApp.Properties.Resources.resources
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\obj\Debug\SalesApp.csproj.GenerateResource.Cache
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\obj\Debug\SalesApp.csproj.CoreCompileInputs.cache
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\bin\Debug\SalesApp.exe.config
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\bin\Debug\SalesApp.exe
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\bin\Debug\SalesApp.pdb
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\bin\Debug\System.Data.SQLite.dll
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\bin\Debug\System.Data.SQLite.xml
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\obj\Debug\SalesApp.exe
+C:\Users\robanderson\Source\Repos\PHP-SRePS\SalesApp\obj\Debug\SalesApp.pdb
