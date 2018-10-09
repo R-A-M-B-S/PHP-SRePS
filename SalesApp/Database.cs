@@ -1,18 +1,14 @@
 ﻿using System.IO;
-using Mono.Data.Sqlite;
+using System.Data.SQLite;
 using System.Collections.Generic;
-using System;
-using System.Data;
 
 namespace SalesApp
 {
     public class Database
     {
 
-        private SqliteConnection dbConn;
+        private SQLiteConnection dbConn;
         private readonly string filename;
-
-      
 
         public Database(string filename)
         {
@@ -25,9 +21,9 @@ namespace SalesApp
             return this;
         }
 
-        public Database Execute(string Sql)
+        public Database Execute(string SQL)
         {
-            new SqliteCommand(Sql, dbConn).ExecuteNonQuery();
+            new SQLiteCommand(SQL, dbConn).ExecuteNonQuery();
             return this;
         }
 
@@ -36,10 +32,10 @@ namespace SalesApp
 			bool initNeeded = false;
 			if (!File.Exists(filename))
 			{
-				SqliteConnection.CreateFile(filename);
+				SQLiteConnection.CreateFile(filename);
 				initNeeded = true;
 			}
-            dbConn = new SqliteConnection("Data Source=" + filename + ";Version=3");
+            dbConn = new SQLiteConnection("Data Source=" + filename + ";Version=3");
             dbConn.Open();
 
 			if (initNeeded)
@@ -49,23 +45,23 @@ namespace SalesApp
 
         public void AddSale(Sale sale)
         {
-            string Sql = "insert into SalesRecord (AmountPaidCash, AmountPaidEftpos) VALUES (" + sale.amountPaidCash + ", " + sale.amountPaidEftpos + "); SELECT last_insert_rowid()";
-            SqliteCommand command = new SqliteCommand(Sql, dbConn);
+            string SQL = "insert into SalesRecord (AmountPaidCash, AmountPaidEftpos) VALUES (" + sale.amountPaidCash + ", " + sale.amountPaidEftpos + "); SELECT last_insert_rowid()";
+            SQLiteCommand command = new SQLiteCommand(SQL, dbConn);
             string row_id = command.ExecuteScalar().ToString();
    
             foreach (SaleItem item in sale.Items)
             {
-                Sql = "INSERT INTO SalesAssets(SaleId, AssetId, Qty) VALUES ("+ row_id +", "+item.Asset+", "+item.Qty+")";
-                command = new SqliteCommand(Sql, dbConn);
+                SQL = "INSERT INTO SalesAssets(SaleId, AssetId, Qty) VALUES ("+ row_id +", "+item.Asset+", "+item.Qty+")";
+                command = new SQLiteCommand(SQL, dbConn);
                 command.ExecuteNonQuery();
             }
         }
 
         public Asset GetAsset(int assetId)
         {
-            string Sql = "SELECT AssetId, Name, Description, Price from Asset WHERE AssetID = " + assetId;
-            SqliteCommand command = new SqliteCommand(Sql, dbConn);
-            SqliteDataReader reader = command.ExecuteReader();
+            string SQL = "SELECT AssetId, Name, Description, Price from Asset WHERE AssetID = " + assetId;
+            SQLiteCommand command = new SQLiteCommand(SQL, dbConn);
+            SQLiteDataReader reader = command.ExecuteReader();
             if (reader.HasRows)
             {
                 while (reader.Read())
@@ -88,9 +84,9 @@ namespace SalesApp
         public List<int> getListSaleIDs()
         {
             List<int> result = new List<int>();
-            string Sql = "SELECT SaleID from SalesRecord";
-            SqliteCommand command = new SqliteCommand(Sql, dbConn);
-            SqliteDataReader o_saleRecord = command.ExecuteReader();
+            string SQL = "SELECT SaleID from SalesRecord";
+            SQLiteCommand command = new SQLiteCommand(SQL, dbConn);
+            SQLiteDataReader o_saleRecord = command.ExecuteReader();
             if (o_saleRecord.HasRows)
             {
                 while (o_saleRecord.Read())
@@ -104,7 +100,7 @@ namespace SalesApp
 
         public IDictionary<int, int> CountAssetSales(int year, int month)
         {
-            string Sql = @"
+            string SQL = @"
                 SELECT sa.AssetId,            
                 Sum(sa.Qty) as qty
                 FROM SalesAssets sa
@@ -114,8 +110,8 @@ namespace SalesApp
                 AND strftime('%m', s.TimeStamp) = '" + month + @"'
                 GROUP BY sa.AssetId";
 
-            SqliteCommand command = new SqliteCommand(Sql, dbConn);
-            SqliteDataReader reader = command.ExecuteReader();
+            SQLiteCommand command = new SQLiteCommand(SQL, dbConn);
+            SQLiteDataReader reader = command.ExecuteReader();
 
             Dictionary<int, int> sales = new Dictionary<int, int>();
             if (reader.HasRows)
@@ -134,9 +130,9 @@ namespace SalesApp
         {
 
             // Get individual items
-            string Sql = "SELECT AssetID, Qty from SalesAssets WHERE SaleID = " + saleID;
-            SqliteCommand command = new SqliteCommand(Sql, dbConn);
-            SqliteDataReader o_AssetRecord = command.ExecuteReader();
+            string SQL = "SELECT AssetID, Qty from SalesAssets WHERE SaleID = " + saleID;
+            SQLiteCommand command = new SQLiteCommand(SQL, dbConn);
+            SQLiteDataReader o_AssetRecord = command.ExecuteReader();
 
             Sale sale = new Sale(saleID);
             if (o_AssetRecord.HasRows)
@@ -152,9 +148,9 @@ namespace SalesApp
 
 
             // Get sale data
-            Sql = "SELECT AmountPaidCash, AmountPaidEftpos FROM SalesRecord WHERE SaleID = " + saleID;
-            command = new SqliteCommand(Sql, dbConn);
-            SqliteDataReader reader = command.ExecuteReader();
+            SQL = "SELECT AmountPaidCash, AmountPaidEftpos FROM SalesRecord WHERE SaleID = " + saleID;
+            command = new SQLiteCommand(SQL, dbConn);
+            SQLiteDataReader reader = command.ExecuteReader();
 
             if (reader.HasRows)
             {

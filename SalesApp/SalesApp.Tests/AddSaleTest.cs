@@ -10,7 +10,7 @@ namespace SalesApp.Tests
 		public void SaleIsAddedWithCorrectData()
         {
             // Do not initialise with test data so we know what sales we have
-			Database database = new Database("test.db").Reset().Connect();
+			Database database = new Database("testSalesAddedCorrectData.db").Reset().Connect();
 
 			Sale sale = new Sale();
 			sale
@@ -44,7 +44,7 @@ namespace SalesApp.Tests
 		[Test()]
 		public void TestSalesDoNoOverwrite()
 		{
-			Database database = new Database("test.db").Reset().Connect();
+			Database database = new Database("testSalesNoOverwrite.db").Reset().Connect();
 
 			Sale sale_1 = new Sale().Add(new SaleItem(1, 5));
 			Sale sale_2 = new Sale().Add(new SaleItem(2, 4));

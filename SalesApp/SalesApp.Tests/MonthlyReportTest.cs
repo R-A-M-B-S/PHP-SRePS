@@ -14,7 +14,7 @@ namespace SalesApp.Tests
             //   Asset 2 x12
             //   Asset 3 x15
             //   Asset 4 x3
-			Database db = new Database("test.db").Reset().Connect().Execute(Program.GetTestData());
+			Database db = new Database("testMonthlyCount.db").Reset().Connect().Execute(Program.GetTestData());
             
 			IDictionary<int, int> count = db.CountAssetSales(DateTime.Now.Year, DateTime.Now.Month);
 

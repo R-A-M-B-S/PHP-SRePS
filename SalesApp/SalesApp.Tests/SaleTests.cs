@@ -27,7 +27,7 @@ namespace SalesApp.Tests
 			// Asset 1: $1.50
 			// Asset 2: $150
 			// Asset 3: $10.40
-			Database db = new Database("test.db").Reset().Connect().Execute(Program.GetTestData());
+			Database db = new Database("testCalcSum.db").Reset().Connect().Execute(Program.GetTestData());
 
 			Sale sale = new Sale();
 			SaleItem item_1 = new SaleItem(1, 10);
