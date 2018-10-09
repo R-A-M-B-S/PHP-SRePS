@@ -34,6 +34,7 @@
     <Compile Include="SainityTest.cs" />
     <Compile Include="SaleTests.cs" />
     <Compile Include="AddSaleTest.cs" />
+    <Compile Include="MonthlyReportTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
