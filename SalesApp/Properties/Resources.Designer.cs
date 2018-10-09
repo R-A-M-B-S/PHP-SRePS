@@ -52,5 +52,11 @@ namespace SalesApp.Properties {
                 return ResourceManager.GetString("SalesAppDatabaseInit", resourceCulture);
             }
         }
+        
+        internal static string TestData {
+            get {
+                return ResourceManager.GetString("TestData", resourceCulture);
+            }
+        }
     }
 }
