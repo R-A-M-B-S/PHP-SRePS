@@ -103,6 +103,7 @@
     <Compile Include="MonthlyReport.Designer.cs">
       <DependentUpon>MonthlyReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Prediction.cs" />
     <Compile Include="SaleItem.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="MainScreen.cs">
