@@ -33,6 +33,7 @@
             this.monthLabel = new System.Windows.Forms.Label();
             this.month = new System.Windows.Forms.ComboBox();
             this.year = new System.Windows.Forms.NumericUpDown();
+			this.GenerateCSV = new System.Windows.Forms.Button();
             this.reportGrid = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -60,6 +61,7 @@
             this.flowLayoutPanel1.Controls.Add(this.monthLabel);
             this.flowLayoutPanel1.Controls.Add(this.month);
             this.flowLayoutPanel1.Controls.Add(this.year);
+			this.flowLayoutPanel1.Controls.Add(this.GenerateCSV);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -114,7 +116,18 @@
             0,
             0});
             this.year.ValueChanged += new System.EventHandler(this.year_changed);
+			// 
+            // GenerateCSV
             // 
+            this.GenerateCSV.ForeColor = System.Drawing.Color.OliveDrab;
+            this.GenerateCSV.Location = new System.Drawing.Point(241, 3);
+            this.GenerateCSV.Name = "GenerateCSV";
+            this.GenerateCSV.Size = new System.Drawing.Size(105, 23);
+            this.GenerateCSV.TabIndex = 3;
+            this.GenerateCSV.Text = "Generate CSV";
+            this.GenerateCSV.UseVisualStyleBackColor = true;
+            this.GenerateCSV.Click += new System.EventHandler(this.GenerateCSV_Click);
+			// 
             // reportGrid
             // 
             this.reportGrid.AllowUserToAddRows = false;
@@ -151,5 +164,6 @@
         private System.Windows.Forms.DataGridView reportGrid;
         private System.Windows.Forms.ComboBox month;
         private System.Windows.Forms.NumericUpDown year;
+		private System.Windows.Forms.Button GenerateCSV;
     }
 }

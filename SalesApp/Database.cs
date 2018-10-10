@@ -3,6 +3,7 @@ using System.Data.SQLite;
 using System.Collections.Generic;
 using System;
 using System.Data;
+using System.Text;
 
 namespace SalesApp
 {
@@ -208,5 +209,33 @@ namespace SalesApp
                 command.ExecuteNonQuery();
             }
         }
+
+		public string export_csv()
+		{
+			string query = "Select SaleID, Timestamp, AmountPaidCash, AmountPaidEftpos from SalesRecord";
+			SQLiteCommand cmd = new SQLiteCommand(query, dbConn);
+			SQLiteDataReader reader = cmd.ExecuteReader();
+			string strDelimiter = ", ";
+            
+            StringBuilder sb = new StringBuilder();
+            Object[] items = new Object[reader.FieldCount];
+
+			if (reader.HasRows)
+			{
+				while (reader.Read())
+				{
+					sb.Append(reader.GetInt32(0)); // id               
+					sb.Append(strDelimiter);
+					sb.Append(reader.GetString(1)); // time
+					sb.Append(strDelimiter);
+					sb.Append(reader.GetDouble(2)); // eftpos
+					sb.Append(strDelimiter);
+					sb.Append(reader.GetDouble(3)); // cash
+					sb.Append("\n");
+				}
+			}
+
+			return sb.ToString();
+		}
     }
 }
