@@ -16,5 +16,10 @@ namespace SalesApp
             Asset = assetId;
             Qty = qty;
         }
+
+        public double SubPrice(Database db) {
+            Asset asset = db.GetAsset(Asset);
+            return asset.price * Qty;
+        }
     }
 }

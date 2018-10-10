@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SalesApp
@@ -25,16 +20,24 @@ namespace SalesApp
             dt.Columns.Add("ItemNo");
             dt.Columns.Add("Description");
             dt.Columns.Add("No. Sales");
-
-            reportGrid.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            reportGrid.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            reportGrid.Columns["No. Sales"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                     
+            try
+            {
+                reportGrid.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                reportGrid.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                reportGrid.Columns["No. Sales"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+            catch (NullReferenceException)
+            {
+                // for some reason, on mono environments, the above columns havn't generated yet.
+                // Since we're only targeting, windows, I'll just let it crash.
+            }
 
             month.SelectedIndex = DateTime.Now.Month - 1;
             year.Value = DateTime.Now.Year;
         }
 
-        public void setDatabase(Database db)
+        public void SetDatabase(Database db)
         {
             this.db = db;
         }
@@ -48,24 +51,30 @@ namespace SalesApp
         {
             UpdateData();
         }
+       
 
-        private void UpdateData()
+        public void UpdateData()
         {
-            int theMonth = month.SelectedIndex;
-            int theYear = (int)year.Value;
+            if (db == null)
+                return;
 
-            // TODO fetch and update datatable
-            // get data from database
+            int theMonth = month.SelectedIndex + 1;
+            int theYear = (int)year.Value;
 
             // clear the datatable
             DataTable dt = reportGrid.DataSource as DataTable;
             dt.Clear();
 
-            /* TODO finish this:
-             foreach (db_row : database.rows) {
-                dt.Rows.Add(db_row.ItemNo, db_row.Description, db_row.NoSales);
-             }
-             */
+            IDictionary<int, int> sales = db.CountAssetSales(theYear, theMonth);
+
+            foreach (int assetID in sales.Keys)
+            {
+                int qty = sales[assetID];
+                Asset asset = db.GetAsset(assetID);
+                string desc = asset.name;
+                dt.Rows.Add(asset.id, desc, qty);
+            }
         }
+        
     }
 }

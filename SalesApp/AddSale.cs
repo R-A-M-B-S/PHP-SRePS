@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SalesApp
@@ -29,11 +24,17 @@ namespace SalesApp
             dt.Columns.Add("Qty");
             dt.Columns.Add("SubPrice");
 
-            SalesData.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            SalesData.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            SalesData.Columns["Item Price"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            SalesData.Columns["Qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            SalesData.Columns["SubPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            try
+            {
+                SalesData.Columns["ItemNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                SalesData.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                SalesData.Columns["Item Price"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                SalesData.Columns["Qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                SalesData.Columns["SubPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+            catch (NullReferenceException)
+            {
+            }
         }
 
         public void setDatabase(Database db)
@@ -66,59 +67,47 @@ namespace SalesApp
         {
             bool added = false;
             int itemno = (int)assetValue.Value;
-            string name = db.GetAssetName(itemno);
-            double price = db.GetAssetPrice(itemno);
-
             int qty = (int)qtyValue.Value;
-            double subPrice = price * qty;  
+                     
+            Asset asset = db.GetAsset(itemno);
 
-            // Make sure the params here match the order of the datatable
-            //If value exists, update it
-            for(int i = 1; i <= dt.Rows.Count; i++)
-            {
-                if (dt.Rows[i-1]["ItemNo"].ToString().Equals(itemno.ToString()))
-                {
-                    double newQty = double.Parse(dt.Rows[i-1]["Qty"].ToString()) + qty;
-                    dt.Rows[i - 1]["Qty"] = newQty;
-                    dt.Rows[i - 1]["SubPrice"] = newQty * price;
-                    added = true;
-                }
-               
-            }
-
-            if (!added) { dt.Rows.Add(itemno, name, price, qty, subPrice); }
-        
-            update_totals_info(dt);
-        }
-
-        private void update_totals_info(DataTable dt)
-        {
-            double sum = 0.0;
+            // If value exists, update it
             foreach (DataRow row in dt.Rows)
             {
-                String s_value = row["SubPrice"].ToString();
-                double value = Double.TryParse(s_value, out value) ? value : 0;
-                sum += value;
+                if (row["ItemNo"].ToString().Equals(itemno.ToString()))
+                {
+                    int newQty = int.Parse(row["Qty"].ToString()) + qty;
+                    SaleItem item = new SaleItem(asset.id, newQty);
+                    row["Qty"] = newQty;
+                    row["SubPrice"] = item.SubPrice(db);
+                    added = true;
+                }
             }
 
-            // TODO refractor these calcs into a new function and unit test it.
-            // Make sure that it's not possible to be sub-cents in the calcs
-            // Also, unit test that the sum is calculated right
-            double tax = Math.Floor(sum * 100 * 0.1) / 100; // assume tax is 10%
-            double total = tax + sum;
+            if (!added)
+            {
+                SaleItem item = new SaleItem(asset.id, qty);
+                // Make sure the params here match the order of the datatable
+                dt.Rows.Add(itemno, asset.name, asset.price, qty, item.SubPrice(db));
+            }
+        
+            update_totals_info();
+        }
 
-            SubTotalValue.Text = sum.ToString();
-            TaxValue.Text = tax.ToString();
-            TotalValue.Text = total.ToString();
+        private void update_totals_info()
+        {
+            Sale sale = makeSale();
+
+            SubTotalValue.Text = sale.subTotal(db).ToString();
+            TaxValue.Text = sale.Tax(db).ToString();
+            TotalValue.Text = sale.TotalPrice(db).ToString();
 
             UpdateFinaliseStatus();
         }
 
-        private void finalise_sale(object sender, MouseEventArgs e)
+        private Sale makeSale()
         {
-            DataTable dt = SalesData.DataSource as DataTable;
-
-            List<SaleItem> items = new List<SaleItem>();
+            Sale sale = new Sale();
             foreach (DataRow row in dt.Rows)
             {
                 string s_item = row["ItemNo"].ToString();
@@ -131,15 +120,25 @@ namespace SalesApp
                     item = int.Parse(s_item);
                     qty = int.Parse(s_qty);
 
-                    items.Add(new SaleItem(item, qty));
+                    sale.Add(new SaleItem(item, qty));
                 }
                 catch (FormatException) { };
             }
 
-            double amountPaid = (double)(CashValue.Value + EftposValue.Value);
-            db.AddSale(items, (double)CashValue.Value, (double)EftposValue.Value);
+            sale.amountPaidCash = (double)CashValue.Value;
+            sale.amountPaidEftpos = (double)EftposValue.Value;
 
+            return sale;
+        }
+
+        private void finalise_sale(object sender, MouseEventArgs e)
+        {         
+            Sale sale = makeSale();
+            db.AddSale(sale);
             dt.Clear();
+            update_totals_info();
+            CashValue.Value = 0;
+            EftposValue.Value = 0;
         }
     }
 }

@@ -12,8 +12,6 @@ namespace SalesApp
         private SQLiteConnection dbConn;
         private readonly string filename;
 
-      
-
         public Database(string filename)
         {
             this.filename = filename;
@@ -25,9 +23,9 @@ namespace SalesApp
             return this;
         }
 
-        public Database Execute(string sql)
+        public Database Execute(string SQL)
         {
-            new SQLiteCommand(sql, dbConn).ExecuteNonQuery();
+            new SQLiteCommand(SQL, dbConn).ExecuteNonQuery();
             return this;
         }
 
@@ -40,41 +38,38 @@ namespace SalesApp
             return this;
         }
 
-        public void AddSale(List<SaleItem> items, double amountPaidCash, double amountPaidEftpos)
+        public void AddSale(Sale sale)
         {
-            string sql = "insert into SalesRecord (AmountPaidCash, AmountPaidEftpos) VALUES (" + amountPaidCash + ", " + amountPaidEftpos + "); SELECT last_insert_rowid()";
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+            string SQL = "insert into SalesRecord (AmountPaidCash, AmountPaidEftpos) VALUES (" + sale.amountPaidCash + ", " + sale.amountPaidEftpos + "); SELECT last_insert_rowid()";
+            SQLiteCommand command = new SQLiteCommand(SQL, dbConn);
             string row_id = command.ExecuteScalar().ToString();
-
-            foreach (SaleItem item in items)
+   
+            foreach (SaleItem item in sale.Items)
             {
-                sql = "INSERT INTO SalesAssets(SaleId, AssetId, Qty) VALUES ("+ row_id +", "+item.Asset+", "+item.Qty+")";
-                command = new SQLiteCommand(sql, dbConn);
+                SQL = "INSERT INTO SalesAssets(SaleId, AssetId, Qty) VALUES ("+ row_id +", "+item.Asset+", "+item.Qty+")";
+                command = new SQLiteCommand(SQL, dbConn);
                 command.ExecuteNonQuery();
             }
         }
 
-        public string GetAssetName(int assetID)
+        public Asset GetAsset(int assetId)
         {
-            string sql = "SELECT Name from Asset WHERE AssetID = " + assetID;
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
-            object o_name = command.ExecuteScalar();
-            if (o_name != null)
-                return o_name.ToString();
-            return "";
-        }
-
-        public double GetAssetPrice(int assetID)
-        {
-            string sql = "SELECT Price from Asset WHERE AssetID = " + assetID;
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
-            object o_price = command.ExecuteScalar();
-            if (o_price != null)
+            string SQL = "SELECT AssetId, Name, Description, Price from Asset WHERE AssetID = " + assetId;
+            SQLiteCommand command = new SQLiteCommand(SQL, dbConn);
+            SQLiteDataReader reader = command.ExecuteReader();
+            if (reader.HasRows)
             {
-                double price = Double.TryParse(o_price.ToString(), out price) ? price : 0;
-                return price;
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    string name = reader.GetString(1);
+                    string desc = reader.GetString(2);
+                    double price = reader.GetDouble(3);
+
+                    return new Asset(id, name, desc, price);
+                }
             }
-            return 0;
+            return new NullAsset();
         }
 
         /// <summary>
@@ -84,8 +79,8 @@ namespace SalesApp
         public List<int> getListSaleIDs()
         {
             List<int> result = new List<int>();
-            string sql = "SELECT SaleID from SalesRecord";
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+            string SQL = "SELECT SaleID from SalesRecord";
+            SQLiteCommand command = new SQLiteCommand(SQL, dbConn);
             SQLiteDataReader o_saleRecord = command.ExecuteReader();
             if (o_saleRecord.HasRows)
             {
@@ -98,31 +93,76 @@ namespace SalesApp
             return result;
         }
 
-        public DataTable getSaleRecord(int saleID)
+        public IDictionary<int, int> CountAssetSales(int year, int month, int months_previous = 1)
         {
-            DataTable result = new DataTable();
-            result.Columns.Add("ItemNo");
-            result.Columns.Add("Description");
-            result.Columns.Add("Item Price");
-            result.Columns.Add("Qty");
-            result.Columns.Add("SubPrice");
-            
-            string sql = "SELECT * from SalesAssets WHERE SaleID = " + saleID;
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+            DateTime end_date = new DateTime(year, month + 1, 1).AddDays(-1);
+            DateTime start_date = new DateTime(year, month, 1).AddMonths(months_previous-1);
+
+            string formated_date = year.ToString("D4") + "/" + month.ToString("D2") + "/" + 1.ToString("D2");
+
+            string SQL = @"
+                SELECT sa.AssetId,
+                Sum(sa.Qty) as qty
+                FROM SalesAssets sa
+                INNER JOIN SalesRecord s
+                ON s.SaleId = sa.SaleId
+                WHERE s.TimeStamp BETWEEN 
+                    '" + start_date.ToString("yyyy-MM-dd") 
+                    + "' AND '" 
+                    + end_date.ToString("yyyy-MM-dd") + @"'
+                GROUP BY sa.AssetId";
+
+            SQLiteCommand command = new SQLiteCommand(SQL, dbConn);
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            Dictionary<int, int> sales = new Dictionary<int, int>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    int id = reader.GetInt16(0);
+                    int qty = reader.GetInt16(1);
+                    sales.Add(id, qty);
+                }
+            }
+            return sales;
+        }
+
+        public Sale getSaleRecord(int saleID)
+        {
+
+            // Get individual items
+            string SQL = "SELECT AssetID, Qty from SalesAssets WHERE SaleID = " + saleID;
+            SQLiteCommand command = new SQLiteCommand(SQL, dbConn);
             SQLiteDataReader o_AssetRecord = command.ExecuteReader();
+
+            Sale sale = new Sale(saleID);
             if (o_AssetRecord.HasRows)
             {
                 while (o_AssetRecord.Read())
                 {
-                    int assetID = o_AssetRecord.GetInt16(1);
-                    string desc = GetAssetName(assetID);
-                    double price = GetAssetPrice(assetID);
-                    int qty = o_AssetRecord.GetInt16(2);
-                    result.Rows.Add(assetID, desc, price, qty, qty * price);
+                    int assetID = o_AssetRecord.GetInt32(0);
+                    int qty = o_AssetRecord.GetInt32(1);
+                    SaleItem item = new SaleItem(assetID, qty);
+                    sale.Add(item);
                 }
             }
-            
-            return result;
+
+
+            // Get sale data
+            SQL = "SELECT AmountPaidCash, AmountPaidEftpos FROM SalesRecord WHERE SaleID = " + saleID;
+            command = new SQLiteCommand(SQL, dbConn);
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    sale.amountPaidCash = reader.GetDouble(0);
+                    sale.amountPaidEftpos = reader.GetDouble(1);
+                }
+            }
+            return sale;
         }
     }
 }
