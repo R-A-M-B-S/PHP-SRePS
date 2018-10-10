@@ -10,12 +10,16 @@ namespace SalesApp
             addSaleControl.setDatabase(db);
             monthlyReportControl.SetDatabase(db);
             displaySales1.setDatabase(db);
+            editAssets1.setDatabase(db);
         }
 
         private void tabControlMain_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             displaySales1.updateSales();
             monthlyReportControl.UpdateData();
+            editAssets1.updateAssets();
         }
+
+       
     }
 }
