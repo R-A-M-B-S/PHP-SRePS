@@ -19,8 +19,7 @@ namespace SalesApp
         {
             InitializeComponent();
 
-        
-
+     
             resetDataTables();
 
 

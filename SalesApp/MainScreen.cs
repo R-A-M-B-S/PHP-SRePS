@@ -10,6 +10,7 @@ namespace SalesApp
             addSaleControl.setDatabase(db);
             monthlyReportControl.setDatabase(db);
             displaySales1.setDatabase(db);
+            editAssets1.setDatabase(db);
         }
 
         private void addSaleControl_Load(object sender, System.EventArgs e)
@@ -21,6 +22,9 @@ namespace SalesApp
         {
             displaySales1.resetDataTables();
             displaySales1.updateSales();
+            editAssets1.updateAssets();
         }
+
+       
     }
 }

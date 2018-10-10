@@ -97,6 +97,12 @@
     <Compile Include="DisplaySales.Designer.cs">
       <DependentUpon>DisplaySales.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditAssets.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditAssets.Designer.cs">
+      <DependentUpon>EditAssets.cs</DependentUpon>
+    </Compile>
     <Compile Include="MonthlyReport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DisplaySales.resx">
       <DependentUpon>DisplaySales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditAssets.resx">
+      <DependentUpon>EditAssets.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>

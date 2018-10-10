@@ -122,7 +122,59 @@ namespace SalesApp
                 }
             }
             
+           
+
             return result;
+        }
+
+        public DataTable getAllAssetRecord()
+        {
+            DataTable result = new DataTable();
+            result.Columns.Add("AssetID");
+            result.Columns.Add("Name");
+            result.Columns.Add("Description");
+            result.Columns.Add("Qty");
+            result.Columns.Add("Item Price");
+
+            string sql = "SELECT * from Asset ";
+            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+            SQLiteDataReader o_AssetRecord = command.ExecuteReader();
+            if (o_AssetRecord.HasRows)
+            {
+                while (o_AssetRecord.Read())
+                {
+                    int assetID = o_AssetRecord.GetInt16(0);
+                    string name =  o_AssetRecord.GetString(1);
+                    string desc = o_AssetRecord.GetString(2);
+                    double price = o_AssetRecord.GetDouble(3);
+                    int qty = o_AssetRecord.GetInt32(4);
+                    result.Rows.Add(assetID, name, desc, qty, price);
+                }
+            }
+            return result;
+
+        }
+
+        public void ChangeAsset(string name, string desc, int qty, int id, double price)
+        {
+           
+            if (id==0){
+                string sql = "INSERT INTO Asset (Name, Description, Price, StockAmount) VALUES (" +"\""+ name + "\",\"" + desc + "\"," + price + "," + qty + ")";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+                command.ExecuteNonQuery();
+            } else {
+                string sql = "UPDATE Asset Set StockAmount = " + qty + " WHERE AssetID =" + id;
+                if (name.Length>=0 || desc.Length == 0 || price == 0)
+                {
+                    if (price > 0 && qty < 0)
+                    {
+
+                    }
+                } 
+               
+                SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+                command.ExecuteNonQuery();
+            }
         }
     }
 }
