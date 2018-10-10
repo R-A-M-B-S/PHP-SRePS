@@ -76,7 +76,6 @@
             this.addSaleControl.Name = "addSaleControl";
             this.addSaleControl.Size = new System.Drawing.Size(770, 529);
             this.addSaleControl.TabIndex = 0;
-            this.addSaleControl.Load += new System.EventHandler(this.addSaleControl_Load);
             // 
             // tabEditAssets
             // 
