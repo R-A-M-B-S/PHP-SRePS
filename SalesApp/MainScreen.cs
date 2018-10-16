@@ -7,9 +7,10 @@ namespace SalesApp
         public MainScreen(Database db)
         {
             InitializeComponent();
-            addSaleControl.setDatabase(db);
+            addSaleControl.SetDatabase(db);
             monthlyReportControl.SetDatabase(db);
-            displaySales1.setDatabase(db);
+            displaySales1.SetDatabase(db);
+            predictionControl.SetDatabase(db);
         }
 
         private void tabControlMain_SelectedIndexChanged(object sender, System.EventArgs e)
