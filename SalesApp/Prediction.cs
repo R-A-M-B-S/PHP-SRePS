@@ -14,10 +14,8 @@ namespace SalesApp
             // Collect all of the differences in sales over monthsPast
 
             //// Collection of sales over monthsPast
-            List<int> months = new List<int>();
+            List<int> months = db.CountAssetSales(DateTime.Now.Year, DateTime.Now.Month, monthsPast).Values.ToList();
             List<float> differences = new List<float>();    // Was array, but list seemed easier due to .Add()
-
-            months.AddRange(db.CountAssetSales(DateTime.Now.Year, DateTime.Now.Month, monthsPast).Values);
 
             for (int i = 1; i < monthsPast; i++)
             {
