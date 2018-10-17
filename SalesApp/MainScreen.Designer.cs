@@ -28,65 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControlMain = new System.Windows.Forms.TabControl();
-            this.tabAddSale = new System.Windows.Forms.TabPage();
-            this.addSaleControl = new SalesApp.AddSale();
-            this.tabEditAssets = new System.Windows.Forms.TabPage();
-            this.tabMonthlyReport = new System.Windows.Forms.TabPage();
-            this.monthlyReportControl = new SalesApp.MonthlyReport();
             this.tabDisplaySales = new System.Windows.Forms.TabPage();
             this.displaySales1 = new SalesApp.DisplaySales();
+            this.tabMonthlyReport = new System.Windows.Forms.TabPage();
+            this.monthlyReportControl = new SalesApp.MonthlyReport();
+            this.tabEditAssets = new System.Windows.Forms.TabPage();
             this.editAssets1 = new SalesApp.EditAssets();
-            this.tabControlMain.SuspendLayout();
-            this.tabAddSale.SuspendLayout();
-            this.tabEditAssets.SuspendLayout();
-            this.tabMonthlyReport.SuspendLayout();
+            this.tabAddSale = new System.Windows.Forms.TabPage();
+            this.addSaleControl = new SalesApp.AddSale();
+            this.tabControlMain = new System.Windows.Forms.TabControl();
+            this.testyboi = new System.Windows.Forms.TabPage();
             this.tabDisplaySales.SuspendLayout();
+            this.tabMonthlyReport.SuspendLayout();
+            this.tabEditAssets.SuspendLayout();
+            this.tabAddSale.SuspendLayout();
+            this.tabControlMain.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControlMain
+            // tabDisplaySales
             // 
-            this.tabControlMain.Controls.Add(this.tabAddSale);
-            this.tabControlMain.Controls.Add(this.tabEditAssets);
-            this.tabControlMain.Controls.Add(this.tabMonthlyReport);
-            this.tabControlMain.Controls.Add(this.tabDisplaySales);
-            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
-            this.tabControlMain.Name = "tabControlMain";
-            this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(784, 561);
-            this.tabControlMain.TabIndex = 0;
-            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
+            this.tabDisplaySales.Controls.Add(this.displaySales1);
+            this.tabDisplaySales.Location = new System.Drawing.Point(4, 22);
+            this.tabDisplaySales.Name = "tabDisplaySales";
+            this.tabDisplaySales.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDisplaySales.Size = new System.Drawing.Size(776, 535);
+            this.tabDisplaySales.TabIndex = 3;
+            this.tabDisplaySales.Text = "DisplaySales";
+            this.tabDisplaySales.UseVisualStyleBackColor = true;
             // 
-            // tabAddSale
+            // displaySales1
             // 
-            this.tabAddSale.Controls.Add(this.addSaleControl);
-            this.tabAddSale.Location = new System.Drawing.Point(4, 22);
-            this.tabAddSale.Name = "tabAddSale";
-            this.tabAddSale.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAddSale.Size = new System.Drawing.Size(776, 535);
-            this.tabAddSale.TabIndex = 0;
-            this.tabAddSale.Text = "Add Sale";
-            this.tabAddSale.UseVisualStyleBackColor = true;
-            // 
-            // addSaleControl
-            // 
-            this.addSaleControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.addSaleControl.Location = new System.Drawing.Point(3, 3);
-            this.addSaleControl.Name = "addSaleControl";
-            this.addSaleControl.Size = new System.Drawing.Size(770, 529);
-            this.addSaleControl.TabIndex = 0;
-            // 
-            // tabEditAssets
-            // 
-            this.tabEditAssets.Controls.Add(this.editAssets1);
-            this.tabEditAssets.Location = new System.Drawing.Point(4, 22);
-            this.tabEditAssets.Name = "tabEditAssets";
-            this.tabEditAssets.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditAssets.Size = new System.Drawing.Size(776, 535);
-            this.tabEditAssets.TabIndex = 1;
-            this.tabEditAssets.Text = "Edit Assets";
-            this.tabEditAssets.UseVisualStyleBackColor = true;
+            this.displaySales1.Location = new System.Drawing.Point(0, 0);
+            this.displaySales1.Name = "displaySales1";
+            this.displaySales1.Size = new System.Drawing.Size(776, 535);
+            this.displaySales1.TabIndex = 0;
             // 
             // tabMonthlyReport
             // 
@@ -107,16 +82,34 @@
             this.monthlyReportControl.Size = new System.Drawing.Size(770, 529);
             this.monthlyReportControl.TabIndex = 0;
             // 
-            // tabDisplaySales
+            // tabEditAssets
             // 
-            this.tabDisplaySales.Controls.Add(this.displaySales1);
-            this.tabDisplaySales.Location = new System.Drawing.Point(4, 22);
-            this.tabDisplaySales.Name = "tabDisplaySales";
-            this.tabDisplaySales.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplaySales.Size = new System.Drawing.Size(776, 535);
-            this.tabDisplaySales.TabIndex = 3;
-            this.tabDisplaySales.Text = "DisplaySales";
-            this.tabDisplaySales.UseVisualStyleBackColor = true;
+            this.tabEditAssets.Controls.Add(this.editAssets1);
+            this.tabEditAssets.Location = new System.Drawing.Point(4, 22);
+            this.tabEditAssets.Name = "tabEditAssets";
+            this.tabEditAssets.Padding = new System.Windows.Forms.Padding(3);
+            this.tabEditAssets.Size = new System.Drawing.Size(776, 535);
+            this.tabEditAssets.TabIndex = 1;
+            this.tabEditAssets.Text = "Edit Assets";
+            this.tabEditAssets.UseVisualStyleBackColor = true;
+            // 
+            // editAssets1
+            // 
+            this.editAssets1.Location = new System.Drawing.Point(0, 0);
+            this.editAssets1.Name = "editAssets1";
+            this.editAssets1.Size = new System.Drawing.Size(776, 533);
+            this.editAssets1.TabIndex = 0;
+            // 
+            // tabAddSale
+            // 
+            this.tabAddSale.Controls.Add(this.addSaleControl);
+            this.tabAddSale.Location = new System.Drawing.Point(4, 22);
+            this.tabAddSale.Name = "tabAddSale";
+            this.tabAddSale.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAddSale.Size = new System.Drawing.Size(776, 535);
+            this.tabAddSale.TabIndex = 0;
+            this.tabAddSale.Text = "Add Sale";
+            this.tabAddSale.UseVisualStyleBackColor = true;
             // 
             // addSaleControl
             // 
@@ -126,28 +119,30 @@
             this.addSaleControl.Size = new System.Drawing.Size(770, 529);
             this.addSaleControl.TabIndex = 0;
             // 
-            // monthlyReportControl
+            // tabControlMain
             // 
-            this.monthlyReportControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.monthlyReportControl.Location = new System.Drawing.Point(3, 3);
-            this.monthlyReportControl.Name = "monthlyReportControl";
-            this.monthlyReportControl.Size = new System.Drawing.Size(770, 529);
-            this.monthlyReportControl.TabIndex = 0;
+            this.tabControlMain.Controls.Add(this.tabAddSale);
+            this.tabControlMain.Controls.Add(this.tabEditAssets);
+            this.tabControlMain.Controls.Add(this.tabMonthlyReport);
+            this.tabControlMain.Controls.Add(this.tabDisplaySales);
+            this.tabControlMain.Controls.Add(this.testyboi);
+            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.SelectedIndex = 0;
+            this.tabControlMain.Size = new System.Drawing.Size(784, 561);
+            this.tabControlMain.TabIndex = 0;
+            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
             // 
-            // displaySales1
+            // testyboi
             // 
-            this.displaySales1.Location = new System.Drawing.Point(0, 0);
-            this.displaySales1.Name = "displaySales1";
-            this.displaySales1.Size = new System.Drawing.Size(776, 535);
-            this.displaySales1.TabIndex = 0;
-           
-            // 
-            // editAssets1
-            // 
-            this.editAssets1.Location = new System.Drawing.Point(0, 0);
-            this.editAssets1.Name = "editAssets1";
-            this.editAssets1.Size = new System.Drawing.Size(776, 533);
-            this.editAssets1.TabIndex = 0;
+            this.testyboi.Location = new System.Drawing.Point(4, 22);
+            this.testyboi.Name = "testyboi";
+            this.testyboi.Padding = new System.Windows.Forms.Padding(3);
+            this.testyboi.Size = new System.Drawing.Size(776, 535);
+            this.testyboi.TabIndex = 4;
+            this.testyboi.Text = "tabPage1";
+            this.testyboi.UseVisualStyleBackColor = true;
             // 
             // MainScreen
             // 
@@ -157,25 +152,27 @@
             this.Controls.Add(this.tabControlMain);
             this.Name = "MainScreen";
             this.Text = "Add Sale";
-            this.tabControlMain.ResumeLayout(false);
-            this.tabAddSale.ResumeLayout(false);
-            this.tabEditAssets.ResumeLayout(false);
-            this.tabMonthlyReport.ResumeLayout(false);
             this.tabDisplaySales.ResumeLayout(false);
+            this.tabMonthlyReport.ResumeLayout(false);
+            this.tabEditAssets.ResumeLayout(false);
+            this.tabAddSale.ResumeLayout(false);
+            this.tabControlMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.TabControl tabControlMain;
-        private System.Windows.Forms.TabPage tabAddSale;
-        private System.Windows.Forms.TabPage tabEditAssets;
-        private AddSale addSaleControl;
-        private System.Windows.Forms.TabPage tabMonthlyReport;
-        private MonthlyReport monthlyReportControl;
+
         private System.Windows.Forms.TabPage tabDisplaySales;
         private DisplaySales displaySales1;
+        private System.Windows.Forms.TabPage tabMonthlyReport;
+        private MonthlyReport monthlyReportControl;
+        private System.Windows.Forms.TabPage tabEditAssets;
         private EditAssets editAssets1;
+        private System.Windows.Forms.TabPage tabAddSale;
+        private AddSale addSaleControl;
+        private System.Windows.Forms.TabControl tabControlMain;
+        private System.Windows.Forms.TabPage testyboi;
     }
 }
 
