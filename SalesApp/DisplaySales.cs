@@ -49,6 +49,7 @@ namespace SalesApp
 
         public void SetDatabase(Database db)
         {
+            
             this.db = db;
         }
 

@@ -21,12 +21,14 @@ namespace SalesApp
 
         public void SetDatabase(Database db)
         {
+            Console.WriteLine("the database " + db);
             this.db = db;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            Console.WriteLine("the database " + db);
+
             int prevMonths = 4;
             string Month = "";
             List<int> Predicted_List = new List<int>();

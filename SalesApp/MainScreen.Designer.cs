@@ -38,7 +38,6 @@
             this.displaySales1 = new SalesApp.DisplaySales();
             this.tabPrediction = new System.Windows.Forms.TabPage();
             this.predictionControl = new SalesApp.predictionControl1();
-            this.predictionControl11 = new SalesApp.predictionControl1();
             this.tabControlMain.SuspendLayout();
             this.tabAddSale.SuspendLayout();
             this.tabMonthlyReport.SuspendLayout();
@@ -137,7 +136,7 @@
             // 
             // tabPrediction
             // 
-            this.tabPrediction.Controls.Add(this.predictionControl11);
+            this.tabPrediction.Controls.Add(this.predictionControl);
             this.tabPrediction.Location = new System.Drawing.Point(4, 25);
             this.tabPrediction.Name = "tabPrediction";
             this.tabPrediction.Padding = new System.Windows.Forms.Padding(3);
@@ -152,13 +151,7 @@
             this.predictionControl.Name = "predictionControl";
             this.predictionControl.Size = new System.Drawing.Size(730, 489);
             this.predictionControl.TabIndex = 0;
-            // 
-            // predictionControl11
-            // 
-            this.predictionControl11.Location = new System.Drawing.Point(8, 3);
-            this.predictionControl11.Name = "predictionControl11";
-            this.predictionControl11.Size = new System.Drawing.Size(730, 489);
-            this.predictionControl11.TabIndex = 0;
+
             // 
             // MainScreen
             // 
@@ -189,7 +182,6 @@
         private DisplaySales displaySales1;
         private predictionControl1 predictionControl;
         private System.Windows.Forms.TabPage tabPrediction;
-        private predictionControl1 predictionControl11;
     }
 }
 
