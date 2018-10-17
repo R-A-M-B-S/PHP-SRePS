@@ -47,7 +47,7 @@ namespace SalesApp
             }
         }
 
-        public void setDatabase(Database db)
+        public void SetDatabase(Database db)
         {
             this.db = db;
         }

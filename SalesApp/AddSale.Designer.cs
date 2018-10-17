@@ -69,13 +69,14 @@
             this.MainLayout.Controls.Add(this.flowLayoutPanel1, 0, 0);
             this.MainLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainLayout.Location = new System.Drawing.Point(0, 0);
+            this.MainLayout.Margin = new System.Windows.Forms.Padding(4);
             this.MainLayout.Name = "MainLayout";
             this.MainLayout.RowCount = 4;
-            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.MainLayout.Size = new System.Drawing.Size(658, 519);
+            this.MainLayout.Size = new System.Drawing.Size(877, 639);
             this.MainLayout.TabIndex = 1;
             // 
             // SalesData
@@ -83,18 +84,20 @@
             this.SalesData.AllowUserToAddRows = false;
             this.SalesData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SalesData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SalesData.Location = new System.Drawing.Point(3, 33);
+            this.SalesData.Location = new System.Drawing.Point(4, 41);
+            this.SalesData.Margin = new System.Windows.Forms.Padding(4);
             this.SalesData.Name = "SalesData";
             this.SalesData.ReadOnly = true;
-            this.SalesData.Size = new System.Drawing.Size(652, 287);
+            this.SalesData.Size = new System.Drawing.Size(869, 353);
             this.SalesData.TabIndex = 0;
             // 
             // FinaliseButton
             // 
             this.FinaliseButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FinaliseButton.Location = new System.Drawing.Point(3, 472);
+            this.FinaliseButton.Location = new System.Drawing.Point(4, 582);
+            this.FinaliseButton.Margin = new System.Windows.Forms.Padding(4);
             this.FinaliseButton.Name = "FinaliseButton";
-            this.FinaliseButton.Size = new System.Drawing.Size(652, 44);
+            this.FinaliseButton.Size = new System.Drawing.Size(869, 53);
             this.FinaliseButton.TabIndex = 1;
             this.FinaliseButton.Text = "Finalise Sale";
             this.FinaliseButton.UseVisualStyleBackColor = true;
@@ -118,16 +121,17 @@
             this.TotalsTable.Controls.Add(this.EftposValue, 1, 5);
             this.TotalsTable.Controls.Add(this.PaymentMethod, 0, 3);
             this.TotalsTable.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TotalsTable.Location = new System.Drawing.Point(455, 326);
+            this.TotalsTable.Location = new System.Drawing.Point(606, 402);
+            this.TotalsTable.Margin = new System.Windows.Forms.Padding(4);
             this.TotalsTable.Name = "TotalsTable";
             this.TotalsTable.RowCount = 6;
             this.TotalsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.TotalsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.TotalsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.TotalsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TotalsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TotalsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TotalsTable.Size = new System.Drawing.Size(200, 140);
+            this.TotalsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.TotalsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.TotalsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.TotalsTable.Size = new System.Drawing.Size(267, 172);
             this.TotalsTable.TabIndex = 2;
             // 
             // SubTotalLabel
@@ -135,9 +139,10 @@
             this.SubTotalLabel.AutoSize = true;
             this.SubTotalLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.SubTotalLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SubTotalLabel.Location = new System.Drawing.Point(4, 1);
+            this.SubTotalLabel.Location = new System.Drawing.Point(5, 1);
+            this.SubTotalLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SubTotalLabel.Name = "SubTotalLabel";
-            this.SubTotalLabel.Size = new System.Drawing.Size(92, 24);
+            this.SubTotalLabel.Size = new System.Drawing.Size(124, 29);
             this.SubTotalLabel.TabIndex = 0;
             this.SubTotalLabel.Text = "Sub Total";
             this.SubTotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -147,9 +152,10 @@
             this.SubTotalValue.AutoSize = true;
             this.SubTotalValue.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.SubTotalValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SubTotalValue.Location = new System.Drawing.Point(103, 1);
+            this.SubTotalValue.Location = new System.Drawing.Point(138, 1);
+            this.SubTotalValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SubTotalValue.Name = "SubTotalValue";
-            this.SubTotalValue.Size = new System.Drawing.Size(93, 24);
+            this.SubTotalValue.Size = new System.Drawing.Size(124, 29);
             this.SubTotalValue.TabIndex = 1;
             this.SubTotalValue.Text = "0.0";
             this.SubTotalValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -159,9 +165,10 @@
             this.TaxLabel.AutoSize = true;
             this.TaxLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.TaxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TaxLabel.Location = new System.Drawing.Point(4, 26);
+            this.TaxLabel.Location = new System.Drawing.Point(5, 31);
+            this.TaxLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TaxLabel.Name = "TaxLabel";
-            this.TaxLabel.Size = new System.Drawing.Size(92, 24);
+            this.TaxLabel.Size = new System.Drawing.Size(124, 30);
             this.TaxLabel.TabIndex = 2;
             this.TaxLabel.Text = "Tax";
             this.TaxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -171,9 +178,10 @@
             this.TaxValue.AutoSize = true;
             this.TaxValue.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.TaxValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TaxValue.Location = new System.Drawing.Point(103, 26);
+            this.TaxValue.Location = new System.Drawing.Point(138, 31);
+            this.TaxValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TaxValue.Name = "TaxValue";
-            this.TaxValue.Size = new System.Drawing.Size(93, 24);
+            this.TaxValue.Size = new System.Drawing.Size(124, 30);
             this.TaxValue.TabIndex = 3;
             this.TaxValue.Text = "0.0";
             this.TaxValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -183,9 +191,10 @@
             this.TotalLabel.AutoSize = true;
             this.TotalLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.TotalLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TotalLabel.Location = new System.Drawing.Point(4, 51);
+            this.TotalLabel.Location = new System.Drawing.Point(5, 62);
+            this.TotalLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TotalLabel.Name = "TotalLabel";
-            this.TotalLabel.Size = new System.Drawing.Size(92, 24);
+            this.TotalLabel.Size = new System.Drawing.Size(124, 30);
             this.TotalLabel.TabIndex = 4;
             this.TotalLabel.Text = "Total";
             this.TotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -195,9 +204,10 @@
             this.TotalValue.AutoSize = true;
             this.TotalValue.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.TotalValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TotalValue.Location = new System.Drawing.Point(103, 51);
+            this.TotalValue.Location = new System.Drawing.Point(138, 62);
+            this.TotalValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TotalValue.Name = "TotalValue";
-            this.TotalValue.Size = new System.Drawing.Size(93, 24);
+            this.TotalValue.Size = new System.Drawing.Size(124, 30);
             this.TotalValue.TabIndex = 5;
             this.TotalValue.Text = "0.0";
             this.TotalValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -207,9 +217,10 @@
             this.CashLabel.AutoSize = true;
             this.CashLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CashLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CashLabel.Location = new System.Drawing.Point(4, 97);
+            this.CashLabel.Location = new System.Drawing.Point(5, 119);
+            this.CashLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CashLabel.Name = "CashLabel";
-            this.CashLabel.Size = new System.Drawing.Size(92, 20);
+            this.CashLabel.Size = new System.Drawing.Size(124, 25);
             this.CashLabel.TabIndex = 6;
             this.CashLabel.Text = "Cash";
             this.CashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -219,9 +230,10 @@
             this.EftposLabel.AutoSize = true;
             this.EftposLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.EftposLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EftposLabel.Location = new System.Drawing.Point(4, 118);
+            this.EftposLabel.Location = new System.Drawing.Point(5, 145);
+            this.EftposLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.EftposLabel.Name = "EftposLabel";
-            this.EftposLabel.Size = new System.Drawing.Size(92, 21);
+            this.EftposLabel.Size = new System.Drawing.Size(124, 26);
             this.EftposLabel.TabIndex = 8;
             this.EftposLabel.Text = "Eftpos";
             this.EftposLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -230,14 +242,15 @@
             // 
             this.CashValue.DecimalPlaces = 2;
             this.CashValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CashValue.Location = new System.Drawing.Point(103, 100);
+            this.CashValue.Location = new System.Drawing.Point(138, 123);
+            this.CashValue.Margin = new System.Windows.Forms.Padding(4);
             this.CashValue.Maximum = new decimal(new int[] {
             1000000000,
             0,
             0,
             0});
             this.CashValue.Name = "CashValue";
-            this.CashValue.Size = new System.Drawing.Size(93, 20);
+            this.CashValue.Size = new System.Drawing.Size(124, 22);
             this.CashValue.TabIndex = 3;
             this.CashValue.ValueChanged += new System.EventHandler(this.CashChanged);
             // 
@@ -245,14 +258,15 @@
             // 
             this.EftposValue.DecimalPlaces = 2;
             this.EftposValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EftposValue.Location = new System.Drawing.Point(103, 121);
+            this.EftposValue.Location = new System.Drawing.Point(138, 149);
+            this.EftposValue.Margin = new System.Windows.Forms.Padding(4);
             this.EftposValue.Maximum = new decimal(new int[] {
             1000000000,
             0,
             0,
             0});
             this.EftposValue.Name = "EftposValue";
-            this.EftposValue.Size = new System.Drawing.Size(93, 20);
+            this.EftposValue.Size = new System.Drawing.Size(124, 22);
             this.EftposValue.TabIndex = 4;
             this.EftposValue.ValueChanged += new System.EventHandler(this.EftposChanged);
             // 
@@ -263,9 +277,10 @@
             this.TotalsTable.SetColumnSpan(this.PaymentMethod, 2);
             this.PaymentMethod.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PaymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PaymentMethod.Location = new System.Drawing.Point(4, 76);
+            this.PaymentMethod.Location = new System.Drawing.Point(5, 93);
+            this.PaymentMethod.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PaymentMethod.Name = "PaymentMethod";
-            this.PaymentMethod.Size = new System.Drawing.Size(192, 20);
+            this.PaymentMethod.Size = new System.Drawing.Size(257, 25);
             this.PaymentMethod.TabIndex = 12;
             this.PaymentMethod.Text = "Payment Method";
             this.PaymentMethod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -278,18 +293,20 @@
             this.flowLayoutPanel1.Controls.Add(this.qtyValue);
             this.flowLayoutPanel1.Controls.Add(this.addItemButton);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 4);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(652, 24);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(869, 29);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // assetLabel
             // 
             this.assetLabel.AutoSize = true;
             this.assetLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.assetLabel.Location = new System.Drawing.Point(3, 0);
+            this.assetLabel.Location = new System.Drawing.Point(4, 0);
+            this.assetLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.assetLabel.Name = "assetLabel";
-            this.assetLabel.Size = new System.Drawing.Size(33, 29);
+            this.assetLabel.Size = new System.Drawing.Size(43, 36);
             this.assetLabel.TabIndex = 1;
             this.assetLabel.Text = "Asset";
             this.assetLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -297,18 +314,20 @@
             // assetValue
             // 
             this.assetValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.assetValue.Location = new System.Drawing.Point(42, 3);
+            this.assetValue.Location = new System.Drawing.Point(55, 4);
+            this.assetValue.Margin = new System.Windows.Forms.Padding(4);
             this.assetValue.Name = "assetValue";
-            this.assetValue.Size = new System.Drawing.Size(120, 20);
+            this.assetValue.Size = new System.Drawing.Size(160, 22);
             this.assetValue.TabIndex = 1;
             // 
             // qtyLabel
             // 
             this.qtyLabel.AutoSize = true;
             this.qtyLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.qtyLabel.Location = new System.Drawing.Point(168, 0);
+            this.qtyLabel.Location = new System.Drawing.Point(223, 0);
+            this.qtyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.qtyLabel.Name = "qtyLabel";
-            this.qtyLabel.Size = new System.Drawing.Size(46, 29);
+            this.qtyLabel.Size = new System.Drawing.Size(61, 36);
             this.qtyLabel.TabIndex = 2;
             this.qtyLabel.Text = "Quantity";
             this.qtyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -317,16 +336,18 @@
             // 
             this.qtyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.qtyValue.Location = new System.Drawing.Point(220, 3);
+            this.qtyValue.Location = new System.Drawing.Point(292, 4);
+            this.qtyValue.Margin = new System.Windows.Forms.Padding(4);
             this.qtyValue.Name = "qtyValue";
-            this.qtyValue.Size = new System.Drawing.Size(120, 20);
+            this.qtyValue.Size = new System.Drawing.Size(160, 22);
             this.qtyValue.TabIndex = 2;
             // 
             // addItemButton
             // 
-            this.addItemButton.Location = new System.Drawing.Point(346, 3);
+            this.addItemButton.Location = new System.Drawing.Point(460, 4);
+            this.addItemButton.Margin = new System.Windows.Forms.Padding(4);
             this.addItemButton.Name = "addItemButton";
-            this.addItemButton.Size = new System.Drawing.Size(75, 23);
+            this.addItemButton.Size = new System.Drawing.Size(100, 28);
             this.addItemButton.TabIndex = 3;
             this.addItemButton.Text = "Add Item";
             this.addItemButton.UseVisualStyleBackColor = true;
@@ -334,11 +355,12 @@
             // 
             // AddSale
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.MainLayout);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddSale";
-            this.Size = new System.Drawing.Size(658, 519);
+            this.Size = new System.Drawing.Size(877, 639);
             this.MainLayout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SalesData)).EndInit();
             this.TotalsTable.ResumeLayout(false);

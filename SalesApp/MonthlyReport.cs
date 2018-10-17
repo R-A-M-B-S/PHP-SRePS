@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
@@ -75,21 +74,6 @@ namespace SalesApp
                 string desc = asset.name;
                 dt.Rows.Add(asset.id, desc, qty);
             }
-        }
-
-		private void GenerateCSV_Click(object sender, EventArgs e)
-        {
-            CreateCSV();
-        }      
-
-        private void CreateCSV()
-        {
-            string time = DateTime.Now.ToShortTimeString();
-            string shorttime = time.Replace(':', ' ');
-
-            string filename = "Saleshistory" + shorttime + ".csv";
-			string csv_text = db.export_csv();
-			File.WriteAllText(filename, csv_text);
         }
         
     }

@@ -74,6 +74,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\sqlite\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -97,17 +98,18 @@
     <Compile Include="DisplaySales.Designer.cs">
       <DependentUpon>DisplaySales.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditAssets.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="EditAssets.Designer.cs">
-      <DependentUpon>EditAssets.cs</DependentUpon>
-    </Compile>
     <Compile Include="MonthlyReport.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="MonthlyReport.Designer.cs">
       <DependentUpon>MonthlyReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Prediction.cs" />
+    <Compile Include="predictionControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="predictionControl1.Designer.cs">
+      <DependentUpon>predictionControl1.cs</DependentUpon>
     </Compile>
     <Compile Include="SaleItem.cs" />
     <Compile Include="Database.cs" />
@@ -125,14 +127,14 @@
     <EmbeddedResource Include="DisplaySales.resx">
       <DependentUpon>DisplaySales.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditAssets.resx">
-      <DependentUpon>EditAssets.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MonthlyReport.resx">
       <DependentUpon>MonthlyReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="predictionControl1.resx">
+      <DependentUpon>predictionControl1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

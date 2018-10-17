@@ -3,7 +3,6 @@ using System.Data.SQLite;
 using System.Collections.Generic;
 using System;
 using System.Data;
-using System.Text;
 
 namespace SalesApp
 {
@@ -12,8 +11,6 @@ namespace SalesApp
 
         private SQLiteConnection dbConn;
         private readonly string filename;
-
-      
 
         public Database(string filename)
         {
@@ -96,16 +93,23 @@ namespace SalesApp
             return result;
         }
 
-        public IDictionary<int, int> CountAssetSales(int year, int month)
+        public IDictionary<int, int> CountAssetSales(int year, int month, int months_previous = 1)
         {
+            DateTime end_date = new DateTime(year, month + 1, 1).AddDays(-1);
+            DateTime start_date = new DateTime(year, month, 1).AddMonths(months_previous-1);
+
+            string formated_date = year.ToString("D4") + "/" + month.ToString("D2") + "/" + 1.ToString("D2");
+
             string SQL = @"
-                SELECT sa.AssetId,            
+                SELECT sa.AssetId,
                 Sum(sa.Qty) as qty
                 FROM SalesAssets sa
                 INNER JOIN SalesRecord s
                 ON s.SaleId = sa.SaleId
-                WHERE strftime('%Y', s.TimeStamp) = '" + year + @"'
-                AND strftime('%m', s.TimeStamp) = '" + month + @"'
+                WHERE s.TimeStamp BETWEEN 
+                    '" + start_date.ToString("yyyy-MM-dd") 
+                    + "' AND '" 
+                    + end_date.ToString("yyyy-MM-dd") + @"'
                 GROUP BY sa.AssetId";
 
             SQLiteCommand command = new SQLiteCommand(SQL, dbConn);
@@ -144,6 +148,7 @@ namespace SalesApp
                 }
             }
 
+
             // Get sale data
             SQL = "SELECT AmountPaidCash, AmountPaidEftpos FROM SalesRecord WHERE SaleID = " + saleID;
             command = new SQLiteCommand(SQL, dbConn);
@@ -159,83 +164,5 @@ namespace SalesApp
             }
             return sale;
         }
-
-        public DataTable getAllAssetRecord()
-        {
-            DataTable result = new DataTable();
-            result.Columns.Add("AssetID");
-            result.Columns.Add("Name");
-            result.Columns.Add("Description");
-            result.Columns.Add("Qty");
-            result.Columns.Add("Item Price");
-
-            string sql = "SELECT * from Asset ";
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
-            SQLiteDataReader o_AssetRecord = command.ExecuteReader();
-            if (o_AssetRecord.HasRows)
-            {
-                while (o_AssetRecord.Read())
-                {
-                    int assetID = o_AssetRecord.GetInt16(0);
-                    string name =  o_AssetRecord.GetString(1);
-                    string desc = o_AssetRecord.GetString(2);
-                    double price = o_AssetRecord.GetDouble(3);
-                    int qty = o_AssetRecord.GetInt32(4);
-                    result.Rows.Add(assetID, name, desc, qty, price);
-                }
-            }
-            return result;
-
-        }
-
-        public void ChangeAsset(string name, string desc, int qty, int id, double price)
-        {
-           
-            if (id==0){
-                string sql = "INSERT INTO Asset (Name, Description, Price, StockAmount) VALUES (" +"\""+ name + "\",\"" + desc + "\"," + price + "," + qty + ")";
-                SQLiteCommand command = new SQLiteCommand(sql, dbConn);
-                command.ExecuteNonQuery();
-            } else {
-                string sql = "UPDATE Asset Set StockAmount = " + qty + " WHERE AssetID =" + id;
-                if (name.Length>=0 || desc.Length == 0 || price == 0)
-                {
-                    if (price > 0 && qty < 0)
-                    {
-
-                    }
-                } 
-               
-                SQLiteCommand command = new SQLiteCommand(sql, dbConn);
-                command.ExecuteNonQuery();
-            }
-        }
-
-		public string export_csv()
-		{
-			string query = "Select SaleID, Timestamp, AmountPaidCash, AmountPaidEftpos from SalesRecord";
-			SQLiteCommand cmd = new SQLiteCommand(query, dbConn);
-			SQLiteDataReader reader = cmd.ExecuteReader();
-			string strDelimiter = ", ";
-            
-            StringBuilder sb = new StringBuilder();
-            Object[] items = new Object[reader.FieldCount];
-
-			if (reader.HasRows)
-			{
-				while (reader.Read())
-				{
-					sb.Append(reader.GetInt32(0)); // id               
-					sb.Append(strDelimiter);
-					sb.Append(reader.GetString(1)); // time
-					sb.Append(strDelimiter);
-					sb.Append(reader.GetDouble(2)); // eftpos
-					sb.Append(strDelimiter);
-					sb.Append(reader.GetDouble(3)); // cash
-					sb.Append("\n");
-				}
-			}
-
-			return sb.ToString();
-		}
     }
 }
