@@ -67,21 +67,21 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(228, 181);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
             // saleIDValue
             // 
             this.saleIDValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.saleIDValue.Location = new System.Drawing.Point(62, 3);
+            this.saleIDValue.Location = new System.Drawing.Point(51, 3);
             this.saleIDValue.Name = "saleIDValue";
-            this.saleIDValue.Size = new System.Drawing.Size(120, 22);
+            this.saleIDValue.Size = new System.Drawing.Size(120, 20);
             this.saleIDValue.TabIndex = 1;
             // 
             // searchItemButton
             // 
-            this.searchItemButton.Location = new System.Drawing.Point(188, 3);
+            this.searchItemButton.Location = new System.Drawing.Point(177, 3);
             this.searchItemButton.Name = "searchItemButton";
             this.searchItemButton.Size = new System.Drawing.Size(75, 23);
             this.searchItemButton.TabIndex = 3;
@@ -107,7 +107,7 @@
             this.saleIDLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.saleIDLabel.Location = new System.Drawing.Point(3, 0);
             this.saleIDLabel.Name = "saleIDLabel";
-            this.saleIDLabel.Size = new System.Drawing.Size(53, 29);
+            this.saleIDLabel.Size = new System.Drawing.Size(42, 29);
             this.saleIDLabel.TabIndex = 1;
             this.saleIDLabel.Text = "Sale ID";
             this.saleIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -116,9 +116,9 @@
             // 
             this.nowShowingLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nowShowingLabel.AutoSize = true;
-            this.nowShowingLabel.Location = new System.Drawing.Point(269, 6);
+            this.nowShowingLabel.Location = new System.Drawing.Point(258, 8);
             this.nowShowingLabel.Name = "nowShowingLabel";
-            this.nowShowingLabel.Size = new System.Drawing.Size(0, 17);
+            this.nowShowingLabel.Size = new System.Drawing.Size(0, 13);
             this.nowShowingLabel.TabIndex = 4;
             // 
             // MainLayout
